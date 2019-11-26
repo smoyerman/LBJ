@@ -1,0 +1,77 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+  <form class="form-basic" method="post">{% csrf_token %}
+	<img width="180px" src="{% static "registration/LBJ.jpeg" %}" alt="LBJlogo">
+	  <h2>Basic Information</h2>
+	<table align="center">
+      <tr>
+        <th>{{ form.first_Name.label_tag }}</th>
+        <td>
+          {{ form.first_Name.errors }}
+          {{ form.first_Name}}
+        </td>
+	<th>{{ form.last_Name.label_tag }}</th>
+        <td>
+          {{ form.last_Name.errors }}
+          {{ form.last_Name}}
+        </td>
+      </tr>
+      </table>
+      <table align="center">
+      <tr>
+        <th>{{ form.address.label_tag }}</th>
+        <td> 
+          {{ form.address.errors }}
+          {{ form.address}}
+        </td>
+      </tr> 
+      </table>
+        <table align="center">
+      <tr>
+        <th>{{ form.city.label_tag }}</th>
+        <td> 
+          {{ form.city.errors }}
+          {{ form.city}}
+        </td>
+        <th>{{ form.state.label_tag }}</th>
+        <td>
+          {{ form.state.errors }}
+          {{ form.state}}
+        </td>
+	<th>{{ form.zip_code.label_tag }}</th>
+        <td>
+          {{ form.zip_code.errors }}
+          {{ form.zip_code}}
+        </td>
+      </tr> 
+      </table>
+      <table align="center">
+      <tr>
+        <th>{{ form.phone.label_tag }}</th>
+        <td> 
+          {{ form.phone.errors }}
+          {{ form.phone}}<br>
+          {{ form.phone.help_text | safe}}
+        </td>
+      </tr> 
+      </table>
+      <table align="center">
+      <tr>
+        <th>{{ form.email.label_tag }}</th>
+        <td> 
+          {{ form.email.errors }}
+          {{ form.email}}
+        </td>
+      </tr> 
+      </table>
+
+	<br><br>
+    <input type="submit" value="Save">
+  </form>
+
+{% endblock %}

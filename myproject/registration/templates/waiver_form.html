@@ -1,0 +1,32 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+
+<form class="form-basic" method="post">{% csrf_token %}
+
+<h2>Complete Registration Waiver</h2>
+<h3>For: {{person.first_Name}} {{person.last_Name}}</h3>
+
+<p>In consideration of being permitted to participate in any way, including travel to and from, in any Judo Tournament, practice, clinic, and related events and activities of the United States Judo Inc., United States Judo Association Inc., United States Judo Federation Inc., ATJA,  PA Judo Inc., Shufu Judo Yudanshakai, Liberty Bell Judo Inc., Liberty Bell Judo Classic, Academy of New Church, El Idrissi Judo LLC, and Liberty Bell Georgian Judo Academy, I hereby:</p>
+<ol>
+<li>Acknowledge that I am familiar with the sport of Judo and understand the rules governing the sport of judo.</li>
+<li>Agree that, prior to participating, I will inspect the mats, equipment, facilities, competition pools or divisions, and the elimination or scoring system to be used, and if I believe anything is unsafe or beyond my capability, I will immediately advise my coach, supervisor, and/or tournament official of such conditions and refuse to participate.</li>
+<li>Acknowledge and fully understand that I will be engaging in a contact sport that might result in serious injury, including permanent disability, traumatic brain injury (TBI) or death, and severe social and economic losses due not only to my own actions, inactions or negligence, but also to the actions, inactions, or negligence of others, the rules of the sport of judo, or conditions of the premises or of any of the equipment used. Further, I acknowledge that there may be other risks not known to file or not reasonable seen at this time.</li>
+<li>Knowing the risks involved in the sport of Judo, I assume all such risks and accept personal responsibility for the damages following such injury, permanent disability, or death.</li>
+<li>Release, waive, discharge, and covenant not to sue United States Judo Inc., United States Judo Association Inc., United States Judo Federation Inc., ATJA,  PA Judo Inc., Shufu Judo Yudanshakai, Liberty Bell Judo Inc., Liberty Bell Judo Classic, Academy of New Church, El Idrissi Judo LLC, and Liberty Bell Georgian Judo Academy, together with their affiliated clubs, their respected administrators, directors, agents, coachers, and other employees or volunteers of the organization, event officials, medical personnel, other participants, their parents, guardians, supervisors and coaches, sponsoring agencies, sponsors, advertisers, and if applicable owners, lessors, and lessees o”Releases”, from any and all claims, demands, losses, or damages on account of injury, including permanent disability or death, TBI, damage to property,  caused or alleged to be caused in whole or in part b the negligence of the Releases or otherwise to the fullest extent permitted by the law.</li>
+</ol>
+<p>I HAVE READ THE ABOVE WARNING, WAIVER, AND RELEASE, UNDERSTAND THAT I GIVE UP SUBSTANTIAL RIGHTS BY SIGNING IT, AND KNOWING THIS, SIGN IT VOLUNTARILY. I AGREE TO PARTICIPATE KNOWING THE RISKS AND CONDITIONS INVOLVED AND DO SO ENTIRELY OF MY OWN FREE WILL. I AFFIRM THAT I AM AT LEAST 18 YEARS OF AGE, OR IF I AM UNDER 18 YEARS OF AGE, I HAVE OBTAINED THE REQUIRED CONSENT OF MY PARENT/GUARDIAN AS EVIDENCED BY THEIR SIGNATURE BELOW</p>
+
+Participant Acceptance of Waiver Terms and Conditions: {{ form.waiver }}
+
+{% if is_minor %}
+<center><h3>FOR PARENTS/GUARDIANS OF PARTICIPANTS OF MINORITY AGE <br> (UNDER AGE 18 AT TIME OF REGISTRATION)</h3></center>
+<p>This is to certify that I, as parent or guardian with legal responsibility for this participant, do consent and agree to his/her release, as provided above, of all Releases, and for myself, my heirs, assigns, ad next of kin, I agree to release and indemnify and hold harmless the Releases from any and all liabilities incident to my minor child’s involvement or participation in these programs as provided above, even if arising from their negligence, to the fullest extent permitted by law. I have instructed the minor participant as to the above warnings and conditions and their ramifications.</p>
+
+Parent/Guardian Acceptance of Terms and Conditions: {{ form.gaurdian_field }} <!--<input type="checkbox" name="terms">-->
+{% endif %}
+<br><br>
+<input type="submit" value="Submit"> 
+</form>
+
+{% endblock %}

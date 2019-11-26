@@ -1,0 +1,86 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Liberty Bell Registration</title>
+
+  <meta name="description" content="Liberty Bell Registration Forms">
+  <meta name="author" content="Liberty Bell">
+
+  <link rel="stylesheet" href="{% static "registration/form-basic.css" %}">
+  <link rel="shortcut icon" href="{% static "registration/favicon.ico" %}" type="image/x-icon">
+  <style type="text/css">
+  table {padding: 5px 0px 5px 0px;}
+  td { padding:0 15px 0 15px;}
+
+  /* Tooltip container */
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  }
+
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    /*width: 120px;*/
+    background-color: white;
+    color: #000;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .beta table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  } 
+  .beta td, .beta th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  .beta tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  .reg_success td, th {
+    vertical-align:top;
+    text-align: left;
+    font-weight:normal;
+    padding: 5px;
+  }
+
+  .reg_success table {
+    font-weight:normal;
+  }
+  </style>
+
+</head>
+
+<body>
+
+  <!--<img width="180px" src="{% static "registration/LBJ.jpeg" %}" alt="My image">--> 
+  
+  <script src="js/scripts.js"></script>
+
+	{% block content %}{% endblock %}
+
+</body>
+</html>
+
+

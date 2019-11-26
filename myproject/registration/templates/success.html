@@ -1,0 +1,207 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form class="form-basic" style="max-width:1000px;">
+
+<img width="180px" src="{% static "registration/LBJ.jpeg" %}" alt="LBJlogo">
+<h2>Payment Confirmed</h2>
+<h3>For: {{person.first_Name}} {{person.last_Name}}</h3>
+<h3>{{person.get_category_display }}</h3>
+
+<p> Congratulations! You're registered for LB 2019! Good Luck</p>
+
+<p>You will be receiving an email at the email account associated with your registration ({{person.email.lower}}) confirming that your registration is complete and listing the pertinent tournament details. For you convenience, these details are also listed below.</p>
+
+<h3> Tournament Information </h3>
+<h3> April 27 & 28 - 2019 </h3>
+
+<table class="reg_success" style="width:100%"> 
+  <tr style="border: 1px solid black;">
+    <th style="border: 1px solid black;"><b><u>FRIDAY APRIL 26</b></u><br>
+<u>REGISTRATION AND WEIGH IN (hotel)</u><br>
+<b>6-9 pm</b> Seniors and Veterans <br>
+<br>
+<b>Special note:</b> Absolutely NO REGISTRATION or WEIGH-INS at the field house the morning of competition<br>
+<b>Satellite Weigh-ins for <u>non-Elite divisions</u> will be permitted: Please see next page for Information</b>
+</th>
+
+    <th style="border: 1px solid black;">
+<u><b>SATURDAY APRIL 27</b></u><br>
+<u>COMPETITION (venue)</u><br>
+8:00 am		Site Opens<br>
+8:30 am		Coaches Meeting<br>
+9:00 am		Opening Ceremony<br>
+Competition Seniors and Veterans<br>
+<br>
+<u>REGISTRATION and WEIGH IN (hotel)</u><br>
+6-9 pm 		Youth and Juniors<br>
+<br>
+<b>Special note:</b> Absolutely NO REGISTRATION or WEIGH-INS at the field house the morning of competition<br>
+<b>Satellite Weigh-ins will be permitted: Please see next page for Information</b>
+
+</th> 
+
+    <th style="border: 1px solid black;">
+<b><u>SUNDAY APRIL 28</u></b>
+<u>COMPETITION (venue)</u>
+8:00 am		Site Opens<br>
+8:30 am		Coaches Meeting<br>
+9:00 am		Opening Ceremony<br>
+Competition Junior and Youth<br>
+
+</th>
+  </tr>
+
+  <tr>
+    <td>
+<b><u>LOCATION</u></b>
+</td>
+    <td>
+<b><u>REGISTRATION & WEIGH IN:</u></b><br>
+Four Points Sheraton<br>
+9461 Roosevelt Blvd<br>
+Philadelphia, PA 19114<br>
+(215)671-9600<br>
+
+</td> 
+    <td>
+<b><u>COMPETITION:</u></b><br>
+Asplundh Field House, Bryn Athyn College<br>
+(Academy of the New Church)<br>
+2775 New Buck Road<br>
+Bryn Athyn, PA 19009<br>
+(267) 502-2573<br>
+
+</td>
+  </tr>
+
+<tr>
+<td>
+<b><u>Tournament Directors:</u></b>
+</td>
+<td>
+Adam Moyerman		(215) 815-2555<br>		
+Kristin El Idrissi	(215) 470-4169<br>
+</td>
+<td>
+<a href="mailto:Libertybelljudo@gmail.com?Subject=Liberty%20Bell%202019%20Registration" target="_top">Libertybelljudo@gmail.com</a>
+</td>
+</tr>
+
+<tr>
+<td><b><u>Eligibility:</u></b></td>
+<td colspan="2">
+<b>No Email Entries Accepted!</b><br>
+Any judoka, age 6 to adult, who has a CURRENT USA JUDO, USJA, USJI, ATJA, AJJF card, or National Passport for foreign athletes. <b>Judo players must present card at registration. A photocopy of your card/judo passport must be sent with your application.</b>
+</td>
+</tr>
+
+<tr>
+<td><b><u>Elite Men’s Senior Nikyu & Elite Open Female Prize Awards</u></b></td>
+<td colspan="2">
+
+<table class="beta">
+<tr>
+<th>Per Weight Class</th>
+<th>1st Place</th>
+<th>2nd Place</th>
+<th>3rd Place</th>
+</tr>
+<tr>
+<td>2-5 Competitors</td>
+<td>$100</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6-10 Competitors</td>
+<td>$250</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>11-15 Competitors</td>
+<td>$450</td>
+<td>$150</td>
+<td></td>
+</tr>
+<tr>
+<td>16+ Competitors</td>
+<td>$750</td>
+<td>$250</td>
+<td>$50</td>
+</tr>
+</table>
+
+</td>
+</tr>
+
+<tr>
+<td><b><u>Rules:</u></b></td>
+<td colspan="2">
+<ol>
+<li><b>IJF 2018 Rules will Govern</b>
+<ol>
+<li>No arm locks until the 2002-2004 YOB division</li>
+<li>Mat Side coaching will be allowed in all divisions</li>
+<li>Players will be allowed to change gis to conform to the rules, without being penalized</li>
+</ol>
+</li>
+<li><b>No chokes or armbars will be allowed in Senior novice competition per USA Judo rule</b></li>
+<li>All female contestants are required to wear a plain white t-shirt and hair should be secured up above the collar</li>
+<li><b>Blue & White judo gis are required for Senior & Veteran Competitors</b></li>
+<li>All contestants, including juniors, must bring at least one white gi.</li>
+<li>A player called to white side must wear a white gi, or forfeit- no exceptions</li>
+<li>Modified Double Elimination for all pools (3 & 4 man pools will fight round robin)</li>
+<li>2005-2006 and 2002-2004 YOB divisions are the only junior divisions with Chokes</li>
+<li>Current IJF Medical Rules will apply to all divisions (no examination except for blood or grave injury)</li>
+</ol>
+</td>
+</tr>
+
+<tr>
+<td><b><u>Match Time:</u></b></td>
+<td colspan="2">
+Juniors, veterans, female novice, and male sankyu and below  - 3 minutes<br>
+All youth, elite female open and mae elite nikyu & above - 4 minutes
+</td></tr>
+
+<tr>
+<td><b><u>Satellite Weigh Ins:</u></b></td>
+<td colspan="2">
+Any USA judo, USJF, or USJA certified coaches of a CERTIFIED CLUB, can request to host a satellite weigh-in. Any coaches interested must email Adam Moyerman requesting to host a satellite weigh-in at <a href="mailto:libertybelljudo@gmail.com">libertybelljudo@gmail.com</a> by April 11th. Only non-Elite pre – registered/paid athletes are eligible to be weighed-in at a satellite location. All satellite locations will be provided between April 12th and April 19th. Weigh-ins must occur between 3pm and 6pm on April 26th.<br> 
+A full list must be submitted to <a href="mailto:libertybelljudo@gmail.com">libertybelljudo@gmail.com</a> by 7pm April 26th. This list must have the following information: full name, age, gender, division, note if athlete is competing in 2 divisions, and weight in kilograms and coaches signature. <br>
+<b>NEW - The will be a weight verification process at the tournament for any judoka taking using a satellite weigh-in to verify the judoka is within the limit of what was stated at the satellite weigh in</b>
+</td></tr>
+
+<tr>
+<td><b><u>NOTE:</u></b></td>
+<td colspan="2">
+<i>Tournament director reserves the right to make any changes deemed necessary to ensure safety and fairness for all competitors.</i>
+</td></tr>
+
+<tr>
+<td><b><u>Hotel Info:</u></b></td>
+<td colspan="2">
+Four Points Sheraton - 9461 Roosevelt Blvd Philadelphia, PA 19114<br>
+(215) 671-9600 <b>Ask for the Liberty Bell Judo Rate<br>
+Reserve By April 5th<br>
+Note ** - NO transportation from the Hotel to the Venue</b><br>
+</td></tr>
+
+<tr>
+<td><b><u>Referee Schedule & Testing:</u></b></td>
+<td colspan="2">
+<i>For information please contact Roy Englert Head Referee : <a href="mailto:royenglertjr@aol.com">royenglertjr@aol.com</a><br>
+Referee Meeting at Four Points Sheraton Friday Night from 7-9 to review and discuss the 2018 IJF rules<br>
+Referee Meeting at venue Saturday morning 8am.  Referee written test will be given Friday night at conclusion of meeting.  Practical during tournament and results in private at conclusion of post referee meeting.</i><br>
+</td></tr>
+
+</table>
+
+
+
+</form>
+{% endblock %}

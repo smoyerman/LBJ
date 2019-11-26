@@ -1,0 +1,275 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form class="form-basic" method="post">{% csrf_token %}
+    <img width="180px" src="{% static "registration/LBJ.jpeg" %}" alt="LBJlogo">
+    <h2>Competitor Information</h2>
+    <h3>{{person.first_Name}} {{person.last_Name}}</h3>
+    <table align="center" cellspacing="10">
+    {{ form }}
+    </table>
+
+<div class="tooltip">Hover for weight class information
+  <span class="tooltiptext">
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:2px 9px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:2px 9px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-mx66{font-size:xx-small;border-color:inherit;text-align:left}
+.tg .tg-7xq3{font-size:xx-small;text-align:left}
+.tg .tg-fz30{font-size:xx-small;background-color:#dae8fc;border-color:inherit;text-align:left}
+.tg .tg-jgjf{font-size:xx-small;background-color:#dae8fc;text-align:left}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-fz30" colspan="10">JUNIOR BOYS - ALL WEIGHTS IN KG (1 KG = 2.2 LBS)</th>
+  </tr>
+  <tr>
+    <td class="tg-mx66">Year Born (Age)</td>
+    <td class="tg-mx66">2011-2012 (6-8)**</td>
+    <td class="tg-mx66">&lt;19</td>
+    <td class="tg-mx66">21</td>
+    <td class="tg-mx66">23</td>
+    <td class="tg-mx66">26</td>
+    <td class="tg-mx66">30</td>
+    <td class="tg-mx66">34</td>
+    <td class="tg-mx66">38+</td>
+    <td class="tg-mx66"></td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">2009-2010 (9-10)</td>
+    <td class="tg-mx66">&lt;26</td>
+    <td class="tg-mx66">30</td>
+    <td class="tg-mx66">34</td>
+    <td class="tg-mx66">38</td>
+    <td class="tg-mx66">43</td>
+    <td class="tg-mx66">43+</td>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66"></td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">2007-2008 (11-12)</td>
+    <td class="tg-mx66">&lt;28</td>
+    <td class="tg-mx66">31</td>
+    <td class="tg-mx66">34</td>
+    <td class="tg-mx66">38</td>
+    <td class="tg-mx66">42</td>
+    <td class="tg-mx66">47</td>
+    <td class="tg-mx66">52</td>
+    <td class="tg-mx66">52+</td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">2005-2006 (13-14)</td>
+    <td class="tg-mx66">&lt;36</td>
+    <td class="tg-mx66">40</td>
+    <td class="tg-mx66">44</td>
+    <td class="tg-mx66">48</td>
+    <td class="tg-mx66">53</td>
+    <td class="tg-mx66">58</td>
+    <td class="tg-mx66">64</td>
+    <td class="tg-mx66">64+</td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">2002-2004 (15-17)</td>
+    <td class="tg-mx66">&lt;50</td>
+    <td class="tg-mx66">55</td>
+    <td class="tg-mx66">60</td>
+    <td class="tg-mx66">66</td>
+    <td class="tg-mx66">73</td>
+    <td class="tg-mx66">81</td>
+    <td class="tg-mx66">90</td>
+    <td class="tg-mx66">90+</td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">1999-2001(18-20)</td>
+    <td class="tg-mx66">&lt;60</td>
+    <td class="tg-mx66">66</td>
+    <td class="tg-mx66">73</td>
+    <td class="tg-mx66">81</td>
+    <td class="tg-mx66">90</td>
+    <td class="tg-mx66">100</td>
+    <td class="tg-mx66">100+</td>
+    <td class="tg-mx66"></td>
+  </tr>
+  <tr>
+    <td class="tg-fz30" colspan="10">JUNIOR GIRLS - ALL WEIGHTS IN KG (1 KG = 2.2 LBS)</td>
+  </tr>
+  <tr>
+    <td class="tg-mx66">Year Born (Age)</td>
+    <td class="tg-mx66">2011-2012 (6-8)**</td>
+    <td class="tg-mx66">&lt;19</td>
+    <td class="tg-mx66">21</td>
+    <td class="tg-mx66">23</td>
+    <td class="tg-mx66">26</td>
+    <td class="tg-mx66">30</td>
+    <td class="tg-mx66">34</td>
+    <td class="tg-mx66">38+</td>
+    <td class="tg-mx66"></td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">2009-2010 (9-10)</td>
+    <td class="tg-mx66">&lt;26</td>
+    <td class="tg-mx66">30</td>
+    <td class="tg-mx66">34</td>
+    <td class="tg-mx66">38</td>
+    <td class="tg-mx66">43</td>
+    <td class="tg-mx66">43+</td>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66"></td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">2007-2008 (11-12)</td>
+    <td class="tg-mx66">&lt;28</td>
+    <td class="tg-mx66">31</td>
+    <td class="tg-mx66">34</td>
+    <td class="tg-mx66">38</td>
+    <td class="tg-mx66">42</td>
+    <td class="tg-mx66">47</td>
+    <td class="tg-mx66">52</td>
+    <td class="tg-mx66">52+</td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">2005-2006 (13-14)</td>
+    <td class="tg-mx66">&lt;36</td>
+    <td class="tg-mx66">40</td>
+    <td class="tg-mx66">44</td>
+    <td class="tg-mx66">48</td>
+    <td class="tg-mx66">53</td>
+    <td class="tg-mx66">58</td>
+    <td class="tg-mx66">64</td>
+    <td class="tg-mx66">64+</td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">2002-2004 (15-17)</td>
+    <td class="tg-mx66">&lt;40</td>
+    <td class="tg-mx66">44</td>
+    <td class="tg-mx66">48</td>
+    <td class="tg-mx66">52</td>
+    <td class="tg-mx66">57</td>
+    <td class="tg-mx66">63</td>
+    <td class="tg-mx66">70</td>
+    <td class="tg-mx66">70+</td>
+  </tr>
+  <tr>
+    <td class="tg-mx66"></td>
+    <td class="tg-mx66">1999-2001(18-20)</td>
+    <td class="tg-mx66">&lt;48</td>
+    <td class="tg-mx66">52</td>
+    <td class="tg-mx66">57</td>
+    <td class="tg-mx66">63</td>
+    <td class="tg-mx66">70</td>
+    <td class="tg-mx66">78</td>
+    <td class="tg-mx66">78+</td>
+    <td class="tg-mx66"></td>
+  </tr>
+  <tr>
+    <td class="tg-jgjf" colspan="10">SENIOR WOMEN: BORN PRIOR 2002 - ALL WEIGHTS IN KG (1 KG = 2.2 LBS)</td>
+  </tr>
+  <tr>
+    <td class="tg-7xq3" colspan="2">Novice (White &amp; Green)</td>
+    <td class="tg-7xq3">&lt;57</td>
+    <td class="tg-7xq3">70</td>
+    <td class="tg-7xq3">70+</td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+  </tr>
+  <tr>
+    <td class="tg-7xq3" colspan="2">Open Ranks (ELITE)</td>
+    <td class="tg-7xq3">&lt;48</td>
+    <td class="tg-7xq3">52</td>
+    <td class="tg-7xq3">57</td>
+    <td class="tg-7xq3">63</td>
+    <td class="tg-7xq3">70</td>
+    <td class="tg-7xq3">78</td>
+    <td class="tg-7xq3">78+</td>
+    <td class="tg-7xq3"></td>
+  </tr>
+  <tr>
+    <td class="tg-jgjf" colspan="10">SENIOR MEN : BORN PRIOR 2002 - ALL WEIGHTS IN KG (1 KG = 2.2 LBS)</td>
+  </tr>
+  <tr>
+    <td class="tg-7xq3" colspan="2">Novice (White &amp; Green)</td>
+    <td class="tg-7xq3">&lt;60</td>
+    <td class="tg-7xq3">66</td>
+    <td class="tg-7xq3">73</td>
+    <td class="tg-7xq3">81</td>
+    <td class="tg-7xq3">90</td>
+    <td class="tg-7xq3">100</td>
+    <td class="tg-7xq3">100+</td>
+    <td class="tg-7xq3"></td>
+  </tr>
+  <tr>
+    <td class="tg-7xq3" colspan="2">Brown Belt</td>
+    <td class="tg-7xq3">&lt;60</td>
+    <td class="tg-7xq3">66</td>
+    <td class="tg-7xq3">73</td>
+    <td class="tg-7xq3">81</td>
+    <td class="tg-7xq3">90</td>
+    <td class="tg-7xq3">100</td>
+    <td class="tg-7xq3">100+</td>
+    <td class="tg-7xq3"></td>
+  </tr>
+  <tr>
+    <td class="tg-7xq3" colspan="2">Nikkyu &amp; above (ELITE)</td>
+    <td class="tg-7xq3">&lt;60</td>
+    <td class="tg-7xq3">66</td>
+    <td class="tg-7xq3">73</td>
+    <td class="tg-7xq3">81</td>
+    <td class="tg-7xq3">90</td>
+    <td class="tg-7xq3">100</td>
+    <td class="tg-7xq3">100+</td>
+    <td class="tg-7xq3"></td>
+  </tr>
+  <tr>
+    <td class="tg-jgjf" colspan="10">VETERANS: 30-39, 40-49, 50+ - ALL WEIGHTS IN KG (1 KG = 2.2 LBS)</td>
+  </tr>
+  <tr>
+    <td class="tg-7xq3" colspan="2">Men</td>
+    <td class="tg-7xq3">&lt;70</td>
+    <td class="tg-7xq3">81</td>
+    <td class="tg-7xq3">94</td>
+    <td class="tg-7xq3">94+</td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+  </tr>
+  <tr>
+    <td class="tg-7xq3" colspan="2">Women</td>
+    <td class="tg-7xq3">Lt</td>
+    <td class="tg-7xq3">Md</td>
+    <td class="tg-7xq3">Hvy</td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+    <td class="tg-7xq3"></td>
+  </tr>
+  <tr>
+    <td class="tg-jgjf" colspan="10">**WILL COMBINE AS CLOSE AS POSSIBLE, Goal is 4kg MAX difference between divisions</td>
+  </tr>
+</table>
+
+</span>
+</div>
+
+    <br><br>
+    <input type="submit" value="Submit">
+
+</form>
+{% endblock %}

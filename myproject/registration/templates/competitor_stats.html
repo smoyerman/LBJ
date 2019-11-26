@@ -1,0 +1,23 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="form-basic" width="100%">
+
+    <p> Juniors </p>
+    {{ no_unique_juniors }}
+    {{ no_competing_juniors }}
+    <p> Novice Seniors </p>
+    {{ no_novice }}
+    {{ no_competing_novice }}
+    <p> Elite Seniors </p>
+    {{ no_elite }}
+    {{ no_competing_elite }}
+    <p> Veterans </p>
+    {{ no_veterans }}
+    {{ no_competing_veterans }} 
+
+</div>
+
+{% endblock %}

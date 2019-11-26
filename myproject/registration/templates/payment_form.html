@@ -1,0 +1,36 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="form-basic">
+
+<img width="180px" src="{% static "registration/LBJ.jpeg" %}" alt="LBJlogo">
+<h2>Complete Payment</h2>
+<h3>For: {{person.first_Name}} {{person.last_Name}}</h3>
+<h3>{{person.get_category_display }}</h3>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="CEHMZQWM8BGTJ">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value="Liberty Bell Registration">
+<input type="hidden" name="amount" value="{{amount}}">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="button_subtype" value="services">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="cn" value="Add special instructions to the seller:">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="rm" value="1">
+<input type="hidden" name="return" value="http://libertybellregistration.com/registration/person/{{person.id}}/payment_confirmation">
+<input type="hidden" name="cancel_return" value="http://libertybellregistration.com/registration/person/{{person.id}}/payment/">
+<input type="hidden" name="tax_rate" value="0.000">
+<input type="hidden" name="shipping" value="0.00">
+<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+</div>
+
+{% endblock %}

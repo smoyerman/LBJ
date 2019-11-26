@@ -1,0 +1,50 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="form-basic" width="100%">
+
+<h2>Create Divisions</h2>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<br />
+
+{% if unique_jr_males %}
+
+Unique Junior Males: {{unique_jr_males}} <br>
+Junior Male Competitors: {{competing_jr_males}} <br><br>
+
+Unique Junior Females: {{unique_jr_females}} <br>
+Junior Female Competitors: {{competing_jr_females}} <br><br>
+
+<table>
+<tr>
+    <td>Age Group</td>
+    <td>Weight Class</td>
+    <td>Number of Competitors</td>
+    <td>Total Matches</td>
+    <td>Match Time</td>
+    <td>Mat</td>
+  </tr>
+  {% for age, weight, person, matches, matchtime in JMDivisions %}
+  <tr>
+    <th style="text-align:center">{{age}}</th>
+    <th style="text-align:center">{{weight}}</th>
+    <th style="text-align:center">{{person.count}}</th>
+    <th style="text-align:center">{{matches}}</th>
+    <th style="text-align:center">{{matchtime}}</th>
+    <th style="text-align:center">0</th>
+  </tr>
+{% endfor %}
+
+{% endif %}
+
+</div>
+
+{% endblock %}
