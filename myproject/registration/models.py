@@ -156,6 +156,7 @@ class JuniorMale(models.Model):
             self.up_one_age = True
         if self.person.category == "2Jr_Age":
             self.up_one_weight = True
+        super(JuniorMale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None) or (getattr(self, 'age_group') == None):
             pass
         else:
@@ -179,7 +180,6 @@ class JuniorMale(models.Model):
                     if kgs <= w:
                         self.weight_class = w
                         break
-        super(JuniorMale, self).save(*args, **kwargs)
 
 
 class JuniorFemale(models.Model):
@@ -209,6 +209,7 @@ class JuniorFemale(models.Model):
             self.up_one_age = True
         if self.person.category == "2Jr_Age":
             self.up_one_weight = True
+        super(JuniorFemale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None) or (getattr(self, 'age_group') == None):
             pass
         else:
@@ -232,7 +233,6 @@ class JuniorFemale(models.Model):
                     if kgs <= w:
                         self.weight_class = w
                         break
-        super(JuniorFemale, self).save(*args, **kwargs)
 
 
 class NoviceFemale(models.Model):
@@ -253,6 +253,7 @@ class NoviceFemale(models.Model):
         if self.person.category == "2Nv":
             self.up_one_weight = True
         self.weight = self.person.proposedweightclass
+        super(NoviceFemale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None): 
             pass
         else:
@@ -277,7 +278,6 @@ class NoviceFemale(models.Model):
                     if kgs <= w:
                         self.weight = w
                         break
-        super(NoviceFemale, self).save(*args, **kwargs)
     
 
 class SeniorFemale(models.Model):
@@ -298,6 +298,7 @@ class SeniorFemale(models.Model):
         if self.person.category == "2Sr":
             self.up_one_weight = True
         self.weight = self.person.proposedweightclass
+        super(SeniorFemale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None):
             pass
         else:
@@ -321,7 +322,6 @@ class SeniorFemale(models.Model):
                     if kgs <= w:
                         self.weight = w
                         break
-        super(SeniorFemale, self).save(*args, **kwargs)
 
 
 class NoviceMale(models.Model):
@@ -349,6 +349,7 @@ class NoviceMale(models.Model):
         if self.person.category in ("2Nv", "2Sr"):
             self.up_one_weight = True
         self.weight = self.person.proposedweightclass
+        super(NoviceMale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None) or (getattr(self, 'category') == None):
             pass
         else:
@@ -374,7 +375,6 @@ class NoviceMale(models.Model):
                     if kgs <= w:
                         self.weight = w
                         break
-        super(NoviceMale, self).save(*args, **kwargs)
 
 
 class SeniorMale(models.Model):
@@ -396,6 +396,7 @@ class SeniorMale(models.Model):
         if self.person.category == "2Sr":
             self.up_one_weight = True
         self.weight = self.person.proposedweightclass
+        super(SeniorMale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None):
             pass
         else:    
@@ -420,7 +421,6 @@ class SeniorMale(models.Model):
                     if kgs <= w:
                         self.weight = w
                         break
-        super(SeniorMale, self).save(*args, **kwargs)
 
 
 class Veteran(models.Model):
@@ -443,6 +443,7 @@ class Veteran(models.Model):
         WEIGHT = params.VT_WEIGHT
         self.gender = self.person.sex
         self.weight = self.person.proposedweightclass
+        super(Veteran, self).save(*args, **kwargs) 
         if (getattr(self, 'actual_weight') == None) or (getattr(self, 'gender') == None):
             pass
         else:
@@ -482,7 +483,6 @@ class Veteran(models.Model):
                     if kgs <= w:
                         self.weight = w
                         break
-        super(Veteran, self).save(*args, **kwargs) 
 
 
 class WaiverForm(ModelForm):

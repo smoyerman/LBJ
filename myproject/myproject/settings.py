@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '+(+e!*u!y#@imxx!83o%f#6l9mqsuv-j_zd2(i26vf!c94q*g6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True 
 
 ALLOWED_HOSTS = [
 	'.libertybellregistration.com']
