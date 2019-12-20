@@ -5,7 +5,7 @@ from faker import Faker
 import random
 from dateutil.relativedelta import relativedelta
 
-from .models import Person 
+from .models import Person, SeniorMale, Veteran, NoviceMale, SeniorFemale, NoviceFemale, JuniorFemale, JuniorMale 
 
 fake = Faker()
 
@@ -39,6 +39,31 @@ class PersonTests(TestCase):
 			age=age,sex=sex,judo_card=judo_card,card_number=card_number,us_citizen=us_citizen,
 			email=email,date_added=date_added,category=category,proposedweightclass=proposedweightclass,
 			waiver=waiver,has_paid=has_paid,is_test=is_test)
+
+def GiveWeights():
+	for sm in SeniorMale.objects.all():
+		print(sm)
+		sm.actual_weight = sm.weight + random.randrange(-1,1) 
+		sm.save()
+	for v in Veteran.objects.all():
+		v.actual_weight = v.weight + random.randrange(-1,1)
+		v.save()
+	for nm in NoviceMale.objects.all():
+                nm.actual_weight = nm.weight + random.randrange(-1,1)               
+                nm.save()
+	for sf in SeniorFemale.objects.all():
+                sf.actual_weight = sf.weight + random.randrange(-1,1)
+                sf.save()
+	for nf in NoviceFemale.objects.all():
+                nf.actual_weight = nf.weight + random.randrange(-1,1)
+                nf.save()
+	for jf in JuniorFemale.objects.all():
+                jf.actual_weight = jf.weight_class + random.randrange(-1,1)
+                jf.save()
+	for jm in JuniorMale.objects.all():
+                jm.actual_weight = jm.weight_class + random.randrange(-1,1)
+                jm.save()
+
 
 def CreatePerson():
 	sex = random.choice(["M","M","M","F"])

@@ -120,6 +120,7 @@ class Person(models.Model):
     proposedweightclass = models.DecimalField("Proposed Weight Class (kgs)", decimal_places=1, max_digits=4, blank=True, null=True, help_text="Estimated weigh-in weight (e.g., 57)")
     waiver = models.BooleanField('Has Signed Waiver', default=False)
     has_paid = models.BooleanField('Has Paid', default=False)
+    is_test = models.BooleanField('Is Test', default=False)
 
     def __str__(self):
         return self.last_Name + ", " + self.first_Name
@@ -356,8 +357,9 @@ class NoviceMale(models.Model):
             VT = Veteran.objects.filter(person=self.person)
             if VT:
                 for v in VT:
-                    v.actual_weight = kgs
-                    v.save()
+                    if not v.actual_weight:
+                        v.actual_weight = kgs
+                        v.save()
             SM = SeniorMale.objects.filter(person=self.person)
             if SM:      
                 for s in SM:
@@ -402,8 +404,9 @@ class SeniorMale(models.Model):
             VT = Veteran.objects.filter(person=self.person)
             if VT:
                 for v in VT:
-                    v.actual_weight = kgs
-                    v.save()
+                    if not v.actual_weight:
+                        v.actual_weight = kgs
+                        v.save()
             NM = NoviceMale.objects.filter(person=self.person)
             if NM:      
                 for n in NM:
