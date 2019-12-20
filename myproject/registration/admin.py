@@ -96,10 +96,10 @@ class VeteranAdmin(admin.ModelAdmin):
 
 @admin.register(NoviceMale)
 class NoviceMaleAdmin(admin.ModelAdmin):
-    list_display = ('person','weight','actual_weight',)
+    list_display = ('person','weight','actual_weight','category')
     search_fields = ('person__last_Name', 'person__first_Name')
     ordering = ('person__last_Name',)
-    list_filter = (NoWeightFilter,'person__category','person__has_paid','weight')
+    list_filter = (NoWeightFilter,'person__category','person__has_paid','weight','category')
 
 
 @admin.register(NoviceFemale)
