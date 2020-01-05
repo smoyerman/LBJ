@@ -156,11 +156,20 @@ class JuniorMale(models.Model):
             self.up_one_age = True
         if self.person.category == "2Jr_Age":
             self.up_one_weight = True
-        super(JuniorMale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None) or (getattr(self, 'age_group') == None):
+            super(JuniorMale, self).save(*args, **kwargs)
             pass
         else:
             kgs = getattr(self, 'actual_weight')
+            # Implement weight class info
+            if kgs > WEIGHT[getattr(self, 'age_group')][-1]:
+                self.weight_class = 0
+            else:
+                for w in WEIGHT[getattr(self, 'age_group')]:
+                    if kgs <= w:
+                        self.weight_class = w
+                        break
+            super(JuniorMale, self).save(*args, **kwargs)
             # Implement logic for second division
             SM = SeniorMale.objects.filter(person=self.person)
             if SM:
@@ -172,14 +181,6 @@ class JuniorMale(models.Model):
                 for n in NM:
                     n.actual_weight = kgs
                     n.save()
-            # Implement weight class info
-            if kgs > WEIGHT[getattr(self, 'age_group')][-1]:
-                self.weight_class = 0
-            else:
-                for w in WEIGHT[getattr(self, 'age_group')]:
-                    if kgs <= w:
-                        self.weight_class = w
-                        break
 
 
 class JuniorFemale(models.Model):
@@ -209,11 +210,20 @@ class JuniorFemale(models.Model):
             self.up_one_age = True
         if self.person.category == "2Jr_Age":
             self.up_one_weight = True
-        super(JuniorFemale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None) or (getattr(self, 'age_group') == None):
+            super(JuniorFemale, self).save(*args, **kwargs)
             pass
         else:
             kgs = getattr(self, 'actual_weight')
+            # Implement logic for weight classes 
+            if kgs > WEIGHT[getattr(self, 'age_group')][-1]:
+                self.weight_class = 0
+            else:
+                for w in WEIGHT[getattr(self, 'age_group')]:
+                    if kgs <= w:
+                        self.weight_class = w
+                        break
+            super(JuniorFemale, self).save(*args, **kwargs)
             # Implement logic for second division
             SF = SeniorFemale.objects.filter(person=self.person)
             if SF:
@@ -225,14 +235,6 @@ class JuniorFemale(models.Model):
                 for n in NF:
                     n.actual_weight = kgs
                     n.save()
-            # Implement logic for weight classes 
-            if kgs > WEIGHT[getattr(self, 'age_group')][-1]:
-                self.weight_class = 0
-            else:
-                for w in WEIGHT[getattr(self, 'age_group')]:
-                    if kgs <= w:
-                        self.weight_class = w
-                        break
 
 
 class NoviceFemale(models.Model):
@@ -253,23 +255,11 @@ class NoviceFemale(models.Model):
         if self.person.category == "2Nv":
             self.up_one_weight = True
         self.weight = self.person.proposedweightclass
-        super(NoviceFemale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None): 
+            super(NoviceFemale, self).save(*args, **kwargs)
             pass
         else:
             kgs = getattr(self, 'actual_weight')
-            # Implement logic for second division
-            VT = Veteran.objects.filter(person=self.person)
-            if VT:
-                for v in VT:
-                    v.actual_weight = kgs
-                    v.save()
-            SF = SeniorFemale.objects.filter(person=self.person)
-            if SF:
-                for s in SF:
-                    if not s.actual_weight:
-                        s.actual_weight = kgs
-                        s.save()
             # Implement logic for weight classes
             if kgs > WEIGHTS[-1]:
                 self.weight = 0
@@ -278,7 +268,21 @@ class NoviceFemale(models.Model):
                     if kgs <= w:
                         self.weight = w
                         break
-    
+            super(NoviceFemale, self).save(*args, **kwargs)
+            # Implement logic for second division
+            VT = Veteran.objects.filter(person=self.person)
+            if VT:
+                for v in VT:
+                    if not v.actual_weight:
+                        v.actual_weight = kgs
+                        v.save()
+            SF = SeniorFemale.objects.filter(person=self.person)
+            if SF:
+                for s in SF:
+                    if not s.actual_weight:
+                        s.actual_weight = kgs
+                        s.save()
+
 
 class SeniorFemale(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -298,22 +302,11 @@ class SeniorFemale(models.Model):
         if self.person.category == "2Sr":
             self.up_one_weight = True
         self.weight = self.person.proposedweightclass
-        super(SeniorFemale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None):
+            super(SeniorFemale, self).save(*args, **kwargs)
             pass
         else:
             kgs = getattr(self, 'actual_weight')
-            # Implement logic for second division
-            VT = Veteran.objects.filter(person=self.person)
-            if VT:
-                for v in VT:
-                    v.actual_weight = kgs
-                    v.save()
-            NF = NoviceFemale.objects.filter(person=self.person)
-            if NF:
-                for n in NF:
-                    n.actual_weight = kgs
-                    n.save()
             # Implement logic for weight classes
             if kgs > WEIGHTS[-1]:
                 self.weight = 0
@@ -322,6 +315,20 @@ class SeniorFemale(models.Model):
                     if kgs <= w:
                         self.weight = w
                         break
+            super(SeniorFemale, self).save(*args, **kwargs)
+            # Implement logic for second division
+            VT = Veteran.objects.filter(person=self.person)
+            if VT:
+                for v in VT:
+                    if not v.actual_weight:
+                        v.actual_weight = kgs
+                        v.save()
+            NF = NoviceFemale.objects.filter(person=self.person)
+            if NF:
+                for n in NF:
+                    if not n.actual_weight:
+                        n.actual_weight = kgs
+                        n.save()
 
 
 class NoviceMale(models.Model):
@@ -349,11 +356,20 @@ class NoviceMale(models.Model):
         if self.person.category in ("2Nv", "2Sr"):
             self.up_one_weight = True
         self.weight = self.person.proposedweightclass
-        super(NoviceMale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None) or (getattr(self, 'category') == None):
+            super(NoviceMale, self).save(*args, **kwargs)
             pass
         else:
             kgs = getattr(self, 'actual_weight')
+            # Implement logic for weight classes
+            if kgs > WEIGHT[getattr(self, 'category')][-1]:
+                self.weight = 0
+            else:
+                for w in WEIGHT[getattr(self, 'category')]:
+                    if kgs <= w:
+                        self.weight = w
+                        break
+            super(NoviceMale, self).save(*args, **kwargs)
             # Implement logic for second division
             VT = Veteran.objects.filter(person=self.person)
             if VT:
@@ -367,14 +383,6 @@ class NoviceMale(models.Model):
                     if not s.actual_weight:
                         s.actual_weight = kgs
                         s.save()
-            # Implement logic for weight classes
-            if kgs > WEIGHT[getattr(self, 'category')][-1]:
-                self.weight = 0
-            else:
-                for w in WEIGHT[getattr(self, 'category')]:
-                    if kgs <= w:
-                        self.weight = w
-                        break
 
 
 class SeniorMale(models.Model):
@@ -396,11 +404,20 @@ class SeniorMale(models.Model):
         if self.person.category == "2Sr":
             self.up_one_weight = True
         self.weight = self.person.proposedweightclass
-        super(SeniorMale, self).save(*args, **kwargs)
         if (getattr(self, 'actual_weight') == None):
+            super(SeniorMale, self).save(*args, **kwargs)
             pass
         else:    
             kgs = getattr(self, 'actual_weight')
+            # Implement logic for weight classes
+            if kgs > WEIGHTS[-1]:
+                self.weight = 0
+            else:
+                for w in WEIGHTS:
+                    if kgs <= w:
+                        self.weight = w
+                        break
+            super(SeniorMale, self).save(*args, **kwargs)
             # Implement logic for second division
             VT = Veteran.objects.filter(person=self.person)
             if VT:
@@ -411,16 +428,9 @@ class SeniorMale(models.Model):
             NM = NoviceMale.objects.filter(person=self.person)
             if NM:      
                 for n in NM:
-                    n.actual_weight = kgs
-                    n.save()
-            # Implement logic for weight classes
-            if kgs > WEIGHTS[-1]:
-                self.weight = 0
-            else:
-                for w in WEIGHTS:
-                    if kgs <= w:
-                        self.weight = w
-                        break
+                    if not n.actual_weight:
+                        n.actual_weight = kgs
+                        n.save()
 
 
 class Veteran(models.Model):
@@ -443,11 +453,20 @@ class Veteran(models.Model):
         WEIGHT = params.VT_WEIGHT
         self.gender = self.person.sex
         self.weight = self.person.proposedweightclass
-        super(Veteran, self).save(*args, **kwargs) 
         if (getattr(self, 'actual_weight') == None) or (getattr(self, 'gender') == None):
+            super(Veteran, self).save(*args, **kwargs) 
             pass
         else:
             kgs = getattr(self, 'actual_weight')
+            # weight class determination
+            if kgs > WEIGHT[getattr(self, 'gender')][-1]:
+                self.weight = 0
+            else:
+                for w in WEIGHT[getattr(self, 'gender')]:
+                    if kgs <= w:
+                        self.weight = w
+                        break
+            super(Veteran, self).save(*args, **kwargs)
             # Implement logic for second division
             if getattr(self, 'gender') == 'F':
                 NF = NoviceFemale.objects.filter(person=self.person)
@@ -475,14 +494,6 @@ class Veteran(models.Model):
                         if not s.actual_weight:
                             s.actual_weight = kgs
                             s.save()
-            # weight class determination
-            if kgs > WEIGHT[getattr(self, 'gender')][-1]:
-                self.weight = 0
-            else:
-                for w in WEIGHT[getattr(self, 'gender')]:
-                    if kgs <= w:
-                        self.weight = w
-                        break
 
 
 class WaiverForm(ModelForm):

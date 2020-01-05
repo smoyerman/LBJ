@@ -7,7 +7,7 @@ from django.contrib.admin import SimpleListFilter
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('last_Name', 'first_Name', 'category', 'phone', 'email', 'date_added')
+    list_display = ('last_Name', 'first_Name', 'category', 'phone', 'email', 'date_added',)
 
     fieldsets = (
         ('Competitor Info', {'fields': (('last_Name','first_Name'),('date_of_Birth','sex'),('category','proposedweightclass'),('waiver','has_paid'))}),
@@ -17,7 +17,7 @@ class PersonAdmin(admin.ModelAdmin):
 
     search_fields = ('last_Name', 'first_Name', 'category')
 
-    list_filter = ('has_paid','waiver','category',)
+    list_filter = ('has_paid','waiver','is_test','category',)
 
     ordering = ('last_Name',)
 

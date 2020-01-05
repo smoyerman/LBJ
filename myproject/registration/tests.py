@@ -41,27 +41,33 @@ class PersonTests(TestCase):
 			waiver=waiver,has_paid=has_paid,is_test=is_test)
 
 def GiveWeights():
+	for sf in SeniorFemale.objects.all():
+		sf.actual_weight = sf.weight + random.randrange(-1,2)
+		sf.save()
+	for nf in NoviceFemale.objects.all():
+		nf.actual_weight = nf.weight + random.randrange(-1,2)
+		nf.save()
 	for sm in SeniorMale.objects.all():
 		print(sm)
-		sm.actual_weight = sm.weight + random.randrange(-1,1) 
+		sm.actual_weight = sm.weight + random.randrange(-1,2) 
 		sm.save()
 	for v in Veteran.objects.all():
-		v.actual_weight = v.weight + random.randrange(-1,1)
+		v.actual_weight = v.weight + random.randrange(-1,2)
 		v.save()
 	for nm in NoviceMale.objects.all():
-                nm.actual_weight = nm.weight + random.randrange(-1,1)               
+                nm.actual_weight = nm.weight + random.randrange(-1,2)
                 nm.save()
 	for sf in SeniorFemale.objects.all():
-                sf.actual_weight = sf.weight + random.randrange(-1,1)
+                sf.actual_weight = sf.weight + random.randrange(-1,2)
                 sf.save()
 	for nf in NoviceFemale.objects.all():
-                nf.actual_weight = nf.weight + random.randrange(-1,1)
+                nf.actual_weight = nf.weight + random.randrange(-1,2)
                 nf.save()
 	for jf in JuniorFemale.objects.all():
-                jf.actual_weight = jf.weight_class + random.randrange(-1,1)
+                jf.actual_weight = jf.weight_class + random.randrange(-1,2)
                 jf.save()
 	for jm in JuniorMale.objects.all():
-                jm.actual_weight = jm.weight_class + random.randrange(-1,1)
+                jm.actual_weight = jm.weight_class + random.randrange(-1,2)
                 jm.save()
 
 

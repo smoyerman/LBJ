@@ -54,7 +54,7 @@ def genJrDivisions():
     params = Parameters()
     # Junior Female Divisions
     JFDivisions = []
-    for age, weight  in params.JF_WEIGHT.items():
+    for age, weight in params.JF_WEIGHT.items():
         weight.append(0)
         for w in weight:
             g = JuniorFemale.objects.filter(age_group=age, weight_class=w)
@@ -215,7 +215,7 @@ def CreateJuniorDivisions(request):
                'JMDivisions':JMDivisions, 'JFDivisions':JFDivisions}
     return render(request, "create_divisions.html", context)
 
-# Function to create the junior divisions
+# Function to create the senior divisions
 def CreateSeniorDivisions(request):
     params = Parameters()
     context = {}
