@@ -139,10 +139,68 @@ def displayCompetitors(request, competitor_class, weight_class):
 def ShutDown(request):
     return render(request, "shutdown.html")
 
+
+# Generate 2 man bracket
+def Gen2Man(competitors, gender, cat, wt):
+    fileName = '2man_RR_' + gender + '_' + cat + '_' + wt + '.pdf'
+    result = finders.find('registration/3man.png')
+    template_loc = finders.searched_locations[0]
+    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
+    c = canvas.Canvas(filePath, pagesize=landscape(letter))
+    width, height = landscape(letter)
+    c.setLineWidth(.3)
+    c.setFont('Helvetica', 12)
+    (player1, player2) = competitors 
+    
+    deltay = 0.3*inch
+    start = 0.5*inch
+    startLeft = 0.8*inch
+    deltaline = 0.05*inch
+    
+    imgwidth = 15.42*inch
+    imgheight = 14.49*inch
+    scaleFac=0.45
+    
+    leftBracket = 2.6*inch
+    
+    start1 = height-start
+    start2 = height-start-deltaline
+    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(width-8*start, start1, "1st")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(width-8*start, start1, "2nd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(width-8*start, start1, "3rd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    c.drawString(startLeft, start1, "Mat Area: ")
+    
+    result = finders.find('registration/2man.png')
+    c.drawImage(result, 3*start, start, width=scaleFac*imgwidth, height=scaleFac*imgheight)
+    
+    c.drawString(leftBracket, 6.8*inch, player1)
+    c.drawString(leftBracket, 6.1*inch, player2)
+    c.drawString(leftBracket, 5.4*inch, player1)
+    c.drawString(leftBracket, 4.7*inch, player2)
+    c.drawString(leftBracket, 4.0*inch, player1)
+    c.drawString(leftBracket, 3.3*inch, player2)
+    
+    c.drawString(leftBracket, 1.6*inch, player1)
+    c.drawString(leftBracket, 0.9*inch, player2)
+
+    c.save()
+
+
 # Generate 3 man bracket
 def Gen3Man(competitors, gender, cat, wt):
     
-    fileName = '3_man_RR_' + gender + '_' + cat + '_' + wt + '.pdf'
+    fileName = '3man_RR_' + gender + '_' + cat + '_' + wt + '.pdf'
     result = finders.find('registration/3man.png')
     template_loc = finders.searched_locations[0]
     filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
@@ -199,6 +257,8 @@ def Gen3Man(competitors, gender, cat, wt):
 
 # Function to create brackets
 def CreatePDFBrackets(competitors, gender, cat, wt):
+    if len(competitors) == 2:
+        Gen2Man(competitors, gender, cat, wt)
     if len(competitors) == 3:
         Gen3Man(competitors, gender, cat, wt)
     else:
