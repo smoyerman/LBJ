@@ -255,12 +255,82 @@ def Gen3Man(competitors, gender, cat, wt):
     
     c.save()
 
+
+# Generate 4 man bracket
+def Gen4Man(competitors, gender, cat, wt):
+
+    fileName = '4man_RR_' + gender + '_' + cat + '_' + wt + '.pdf'
+    result = finders.find('registration/3man.png')
+    template_loc = finders.searched_locations[0]
+    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
+    c = canvas.Canvas(filePath, pagesize=letter)
+    width, height = landscape(letter)
+    c.setLineWidth(.3)
+    c.setFont('Helvetica', 9)
+    (player1, player2, player3, player4) = competitors
+
+    deltay = 0.3*inch
+    start = 0.5*inch
+    startLeft = 0.8*inch
+    deltaline = 0.05*inch
+
+    imgwidth = 13.92*inch
+    imgheight = 29.32*inch
+    scaleFac=0.31
+
+    leftBracket = 2.1*inch
+
+    start1 = height-start
+    start2 = height-start-deltaline
+    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(width-8*start, start1, "1st")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(width-8*start, start1, "2nd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(width-8*start, start1, "3rd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    c.drawString(startLeft, start1, "Mat Area: ")
+
+    result = finders.find('registration/4man.png')
+    c.drawImage(result, 2*inch, start, width=scaleFac*imgwidth, height=scaleFac*imgheight)
+
+    c.drawString(leftBracket, 9.1*inch, player1)
+    c.drawString(leftBracket, 8.65*inch, player2)
+    c.drawString(leftBracket, 8.25*inch, player3)
+    c.drawString(leftBracket, 7.8*inch, player4)
+
+    c.drawString(leftBracket, 6.8*inch, player1)
+    c.drawString(leftBracket, 6.35*inch, player3)
+    c.drawString(leftBracket, 5.9*inch, player2)
+    c.drawString(leftBracket, 5.45*inch, player4)
+
+    c.drawString(leftBracket, 4.45*inch, player1)
+    c.drawString(leftBracket, 4.05*inch, player4)
+    c.drawString(leftBracket, 3.6*inch, player2)
+    c.drawString(leftBracket, 3.15*inch, player3)
+
+    c.drawString(leftBracket+0.2*inch, 2*inch, player1)
+    c.drawString(leftBracket+0.2*inch, 1.6*inch, player2)
+    c.drawString(leftBracket+0.2*inch, 1.15*inch, player3)
+    c.drawString(leftBracket+0.2*inch, 0.75*inch, player4)
+
+    c.save()
+
 # Function to create brackets
 def CreatePDFBrackets(competitors, gender, cat, wt):
     if len(competitors) == 2:
         Gen2Man(competitors, gender, cat, wt)
     if len(competitors) == 3:
         Gen3Man(competitors, gender, cat, wt)
+    if len(competitors) == 4:
+        Gen4Man(competitors, gender, cat, wt)
     else:
         pass
 
