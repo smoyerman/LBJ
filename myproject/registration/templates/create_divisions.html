@@ -3,6 +3,23 @@
 
 {% block content %}
 
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+document.getElementById("defaultOpen").click();
+</script>
+
 <div class="form-basic" width="100%">
 
 <h2>Create Divisions</h2>
@@ -13,37 +30,78 @@
     <input type="submit" value="Submit">
 </form>
 
+</div>
+
 <br />
 
-{% if unique_jr_males %}
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'JuniorMales')" id="defaultOpen">Junior Males</button>
+  <button class="tablinks" onclick="openCity(event, 'JuniorFemales')">Junior Females</button>
+</div>
 
-Unique Junior Males: {{unique_jr_males}} <br>
-Junior Male Competitors: {{competing_jr_males}} <br><br>
+<div id="JuniorMales" class="tabcontent">
 
-Unique Junior Females: {{unique_jr_females}} <br>
-Junior Female Competitors: {{competing_jr_females}} <br><br>
+  <h2>Junior Males</h2>
 
-<table>
-<tr>
-    <td>Age Group</td>
-    <td>Weight Class</td>
-    <td>Number of Competitors</td>
-    <td>Total Matches</td>
-    <td>Match Time</td>
-    <td>Mat</td>
-  </tr>
-  {% for age, weight, person, matches, matchtime in JMDivisions %}
-  <tr>
-    <th style="text-align:center">{{age}}</th>
-    <th style="text-align:center">{{weight}}</th>
-    <th style="text-align:center">{{person.count}}</th>
-    <th style="text-align:center">{{matches}}</th>
-    <th style="text-align:center">{{matchtime}}</th>
-    <th style="text-align:center">0</th>
-  </tr>
-{% endfor %}
+  {% if unique_jr_males %}
+    
+    Unique Junior Males: {{unique_jr_males}} <br>
+    Junior Male Competitors: {{competing_jr_males}} <br><br>
 
-{% endif %}
+    <table>
+    <tr>
+        <td>Age Group</td>
+        <td>Weight Class</td>
+        <td>Number of Competitors</td>
+        <td>Total Matches</td>
+        <td>Match Time</td>
+        <td>Mat</td>
+      </tr>
+      {% for age, weight, person, matches, matchtime in JMDivisions %}
+      <tr>
+        <th style="text-align:center">{{age}}</th>
+        <th style="text-align:center">{{weight}}</th>
+        <th style="text-align:center">{{person.count}}</th>
+        <th style="text-align:center">{{matches}}</th>
+        <th style="text-align:center">{{matchtime}}</th>
+        <th style="text-align:center">0</th>
+      </tr>
+    {% endfor %}
+
+  {% endif %}
+
+</div>
+
+<div id="JuniorFemales" class="tabcontent">
+
+  <h2>Junior Females</h2>
+
+  {% if unique_jr_females %}
+    
+    Unique Junior Females: {{unique_jr_females}} <br>
+    Junior Female Competitors: {{competing_jr_females}} <br><br>
+
+    <table>
+    <tr>
+        <td>Age Group</td>
+        <td>Weight Class</td>
+        <td>Number of Competitors</td>
+        <td>Total Matches</td>
+        <td>Match Time</td>
+        <td>Mat</td>
+      </tr>
+      {% for age, weight, person, matches, matchtime in JFDivisions %}
+      <tr>
+        <th style="text-align:center">{{age}}</th>
+        <th style="text-align:center">{{weight}}</th>
+        <th style="text-align:center">{{person.count}}</th>
+        <th style="text-align:center">{{matches}}</th>
+        <th style="text-align:center">{{matchtime}}</th>
+        <th style="text-align:center">0</th>
+      </tr>
+    {% endfor %}
+
+  {% endif %}
 
 </div>
 

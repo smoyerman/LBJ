@@ -36,14 +36,14 @@ Payment_Options = {
 def computeMatches(g):
     n = len(g)
     if len(g) <= 5:
-        total_matches = max(0,n*(n-1)/2)
+        total_matches = max(0,int(n*(n-1)/2))
     elif len(g) <= 8:
         total_matches = n + 3 + max(0,n-6)
     elif len(g) <= 16:
         total_matches = n + 7 + max(0,n-12)
     elif len(g) <= 32:
         total_matches = n + 15 + max(0,n-24)
-    elif len(g) <= 32:
+    elif len(g) <= 64:
         total_matches = n + 31 + max(0,n-48)
     else:
         total_matches = 0
