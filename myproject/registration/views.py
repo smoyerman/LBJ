@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.forms import TextInput
+from django.contrib.staticfiles import finders
 
 from registration.models import Person, JudoInfoForm, WaiverForm, JuniorMale, JuniorFemale, SeniorMale, SeniorFemale, Veteran, NoviceFemale, NoviceMale, Parameters 
 from django.contrib.admin import widgets
@@ -14,6 +15,12 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 from decimal import Decimal
+
+from reportlab.lib.pagesizes import letter, landscape
+from reportlab.pdfgen import canvas
+from reportlab.platypus import SimpleDocTemplate, Image
+from reportlab.lib.units import inch
+import os
 
 Payment_Options = {
         "1Jr": 70,  #
@@ -131,6 +138,71 @@ def displayCompetitors(request, competitor_class, weight_class):
 # Function to display closed registration
 def ShutDown(request):
     return render(request, "shutdown.html")
+
+# Generate 3 man bracket
+def Gen3Man(competitors, gender, cat, wt):
+    
+    fileName = '3_man_RR_' + gender + '_' + cat + '_' + wt + '.pdf'
+    result = finders.find('registration/3man.png')
+    template_loc = finders.searched_locations[0]
+    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
+    c = canvas.Canvas(filePath, pagesize=landscape(letter))
+    width, height = landscape(letter)
+    c.setLineWidth(.3)
+    c.setFont('Helvetica', 12)
+    (player1, player2, player3) = competitors 
+    
+    deltay = 0.3*inch
+    start = 0.5*inch
+    startLeft = 0.8*inch
+    deltaline = 0.05*inch
+    
+    imgwidth = 15.42*inch
+    imgheight = 14.49*inch
+    scaleFac=0.45
+    
+    leftBracket = 2.6*inch
+    
+    start1 = height-start
+    start2 = height-start-deltaline
+    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(width-8*start, start1, "1st")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(width-8*start, start1, "2nd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(width-8*start, start1, "3rd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    c.drawString(startLeft, start1, "Mat Area: ")
+    
+    result = finders.find('registration/3man.png')
+    c.drawImage(result, 3*start, start, width=scaleFac*imgwidth, height=scaleFac*imgheight)
+    
+    c.drawString(leftBracket, 6.8*inch, player1)
+    c.drawString(leftBracket, 6.15*inch, player2)
+    c.drawString(leftBracket, 5.5*inch, player1)
+    c.drawString(leftBracket, 4.9*inch, player3)
+    c.drawString(leftBracket, 4.3*inch, player2)
+    c.drawString(leftBracket, 3.65*inch, player3)
+    
+    c.drawString(leftBracket, 2.1*inch, player1)
+    c.drawString(leftBracket, 1.5*inch, player2)
+    c.drawString(leftBracket, 0.9*inch, player3)
+    
+    c.save()
+
+# Function to create brackets
+def CreatePDFBrackets(competitors, gender, cat, wt):
+    if len(competitors) == 3:
+        Gen3Man(competitors, gender, cat, wt)
+    else:
+        pass
 
 ########## Juniors first - day one ##############
 def Create2DivJuniors():
