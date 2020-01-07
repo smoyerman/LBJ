@@ -26,12 +26,12 @@ class Parameters(object):
     JM_AGES[2012]='Bantam 2'
     JM_AGES[2013]='Bantam 2'
     JM_WEIGHT = {}
-    JM_WEIGHT['6-8'] = [19,21,23,26,31,35]
-    JM_WEIGHT['9-10'] = [26,30,34,38,43]
-    JM_WEIGHT['11-12'] = [28,31,34,38,42,47,52]
-    JM_WEIGHT['13-14'] = [36,40,44,48,53,58,64]
-    JM_WEIGHT['15-17'] = [50,55,60,66,73,81,90]
-    JM_WEIGHT['18-20'] = [60,66,73,81,90,100] 
+    JM_WEIGHT['Bantam 2'] = [19,21,23,26,31,35]
+    JM_WEIGHT['Bantam 3'] = [26,30,34,38,43]
+    JM_WEIGHT['Intermed.'] = [28,31,34,38,42,47,52]
+    JM_WEIGHT['Juvenile'] = [36,40,44,48,53,58,64]
+    JM_WEIGHT['Cadet'] = [50,55,60,66,73,81,90]
+    JM_WEIGHT['IJF'] = [60,66,73,81,90,100] 
 
     JF_AGES = {}
     JF_AGES[2000]='IJF'
@@ -49,12 +49,12 @@ class Parameters(object):
     JF_AGES[2012]='Bantam 2'
     JF_AGES[2013]='Bantam 2'
     JF_WEIGHT = {}
-    JF_WEIGHT['6-8'] = [19,21,23,26,31,35]
-    JF_WEIGHT['9-10'] = [26,30,34,38,43]
-    JF_WEIGHT['11-12'] = [28,31,34,38,42,47,52]
-    JF_WEIGHT['13-14'] = [36,40,44,48,53,58,64]
-    JF_WEIGHT['15-17'] = [40,44,48,52,57,63,70]
-    JF_WEIGHT['18-20'] = [48,52,57,63,70,78]
+    JF_WEIGHT['Bantam 2'] = [19,21,23,26,31,35]
+    JF_WEIGHT['Bantam 3'] = [26,30,34,38,43]
+    JF_WEIGHT['Intermed.'] = [28,31,34,38,42,47,52]
+    JF_WEIGHT['Juvenile'] = [36,40,44,48,53,58,64]
+    JF_WEIGHT['Cadet'] = [40,44,48,52,57,63,70]
+    JF_WEIGHT['IJF'] = [48,52,57,63,70,78]
 
     NF_WEIGHTS = [57,70]
     EF_WEIGHTS = [48,52,57,63,70,78]
