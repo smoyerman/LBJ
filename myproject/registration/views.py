@@ -21,6 +21,7 @@ from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Image
 from reportlab.lib.units import inch
 import os
+import random
 
 Payment_Options = {
         "1Jr": 70,  #
@@ -139,10 +140,15 @@ def displayCompetitors(request, competitor_class, weight_class):
 def ShutDown(request):
     return render(request, "shutdown.html")
 
+# Definition to name pool sheets
+def GiveName(prepend, gender, cat, wt):
+    fileName = prepend + gender + '_' + cat + '_' + wt + '.pdf'
+    return fileName 
 
 # Generate 2 man bracket
 def Gen2Man(competitors, gender, cat, wt):
-    fileName = '2man_RR_' + gender + '_' + cat + '_' + wt + '.pdf'
+    prepend = '2man_RR_'
+    fileName = GiveName(prepend, gender, cat, wt)
     result = finders.find('registration/3man.png')
     template_loc = finders.searched_locations[0]
     filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
@@ -200,7 +206,8 @@ def Gen2Man(competitors, gender, cat, wt):
 # Generate 3 man bracket
 def Gen3Man(competitors, gender, cat, wt):
     
-    fileName = '3man_RR_' + gender + '_' + cat + '_' + wt + '.pdf'
+    prepend = '3man_RR_'
+    fileName = GiveName(prepend, gender, cat, wt)
     result = finders.find('registration/3man.png')
     template_loc = finders.searched_locations[0]
     filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
@@ -259,12 +266,13 @@ def Gen3Man(competitors, gender, cat, wt):
 # Generate 4 man bracket
 def Gen4Man(competitors, gender, cat, wt):
 
-    fileName = '4man_RR_' + gender + '_' + cat + '_' + wt + '.pdf'
-    result = finders.find('registration/3man.png')
+    prepend = '4man_RR_'
+    fileName = GiveName(prepend, gender, cat, wt)
+    result = finders.find('registration/4man.png')
     template_loc = finders.searched_locations[0]
     filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
     c = canvas.Canvas(filePath, pagesize=letter)
-    width, height = landscape(letter)
+    width, height = letter
     c.setLineWidth(.3)
     c.setFont('Helvetica', 9)
     (player1, player2, player3, player4) = competitors
@@ -323,14 +331,167 @@ def Gen4Man(competitors, gender, cat, wt):
 
     c.save()
 
+
+# Generate 5 man bracket
+def Gen5Man(competitors, gender, cat, wt):
+
+    prepend = '5man_RR_' 
+    fileName = GiveName(prepend, gender, cat, wt)
+    result = finders.find('registration/5man.png')
+    template_loc = finders.searched_locations[0]
+    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
+    c = canvas.Canvas(filePath, pagesize=landscape(letter))
+    width, height = landscape(letter)
+    c.setLineWidth(.3)
+    c.setFont('Helvetica', 9)
+    (player1, player2, player3, player4, player5) = competitors
+
+    deltay = 0.3*inch
+    start = 0.5*inch
+    startLeft = 0.8*inch
+    deltaline = 0.05*inch
+
+    imgwidth = 30.5*inch
+    imgheight = 22.17*inch
+    scaleFac=0.3
+
+    leftBracket = 1.6*inch
+
+    start1 = height-start
+    start2 = height-start-deltaline
+    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(width-8*start, start1, "1st")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(width-8*start, start1, "2nd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(width-8*start, start1, "3rd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    c.drawString(startLeft, start1, "Mat Area: ")
+
+    result = finders.find('registration/5man.png')
+    c.drawImage(result, 1.5*inch, start-0.1*inch, width=scaleFac*imgwidth, height=scaleFac*imgheight)
+
+    c.drawString(leftBracket, 6.6*inch, player1)
+    c.drawString(leftBracket, 6.15*inch, player2)
+    c.drawString(leftBracket, 5.75*inch, player3)
+    c.drawString(leftBracket, 5.3*inch, player4)
+
+    c.drawString(leftBracket, 4.45*inch, player1)
+    c.drawString(leftBracket, 4.05*inch, player3)
+    c.drawString(leftBracket, 3.6*inch, player2)
+    c.drawString(leftBracket, 3.2*inch, player5)
+
+    c.drawString(leftBracket, 2.1*inch, player3)
+    c.drawString(leftBracket, 1.7*inch, player5)
+    c.drawString(leftBracket, 1.25*inch, player1)
+    c.drawString(leftBracket, 0.85*inch, player4)
+
+    c.drawString(leftBracket+4.7*inch, 6.6*inch, player4)
+    c.drawString(leftBracket+4.7*inch, 6.15*inch, player5)
+    c.drawString(leftBracket+4.7*inch, 5.75*inch, player2)
+    c.drawString(leftBracket+4.7*inch, 5.3*inch, player3)
+
+    c.drawString(leftBracket+4.7*inch, 4.45*inch, player1)
+    c.drawString(leftBracket+4.7*inch, 4.05*inch, player5)
+    c.drawString(leftBracket+4.7*inch, 3.6*inch, player2)
+    c.drawString(leftBracket+4.7*inch, 3.2*inch, player4)
+
+    c.drawString(leftBracket+4.7*inch, 2.3*inch, player1)
+    c.drawString(leftBracket+4.7*inch, 1.9*inch, player2)
+    c.drawString(leftBracket+4.7*inch, 1.45*inch, player3)
+    c.drawString(leftBracket+4.7*inch, 1.05*inch, player4)
+    c.drawString(leftBracket+4.7*inch, 0.6*inch, player5)
+
+    c.save()
+
+
+# Generate 8 man bracket
+def Gen8Man(competitors, gender, cat, wt):
+
+    prepend = '8man_MD_'
+    fileName = GiveName(prepend, gender, cat, wt)
+    result = finders.find('registration/8man.png')
+    template_loc = finders.searched_locations[0]
+    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
+    c = canvas.Canvas(filePath, pagesize=landscape(letter))
+    width, height = landscape(letter)
+    c.setLineWidth(.3)
+    c.setFont('Helvetica', 10)
+
+    byes = 8 - len(competitors)
+    players = [""]*8
+    if byes == 1:
+        bye_locs = [random.randint(0,7)]
+    elif byes == 2:
+        bye_locs = [random.randint(0,3), random.randint(4,7)]
+    else:
+        bye_locs = []
+        
+    j = 0
+    for i in range(8):
+        if i in bye_locs:
+            players[i] = "Bye"
+        else:
+            players[i] = competitors[j]
+            j += 1
+
+    deltay = 0.3*inch
+    start = 0.5*inch
+    startLeft = 0.8*inch
+    deltaline = 0.05*inch
+
+    imgwidth = 25.11*inch
+    imgheight = 19.67*inch
+    scaleFac=0.35
+
+    leftBracket = 1.3*inch
+
+    start1 = height-start
+    start2 = height-start-deltaline
+    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(width-8*start, start1, "1st")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(width-8*start, start1, "2nd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(width-8*start, start1, "3rd")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    c.drawString(startLeft, start1, "Mat Area: ")
+
+    result = finders.find('registration/8man.png')
+    c.drawImage(result, 1.5*start, start-0.5*inch, width=scaleFac*imgwidth, height=scaleFac*imgheight)
+
+    for i,player in enumerate(players):
+        c.drawString(leftBracket, 6.35*inch-i*0.49*inch, player)
+
+    c.save()
+
+
 # Function to create brackets
 def CreatePDFBrackets(competitors, gender, cat, wt):
     if len(competitors) == 2:
         Gen2Man(competitors, gender, cat, wt)
-    if len(competitors) == 3:
+    elif len(competitors) == 3:
         Gen3Man(competitors, gender, cat, wt)
-    if len(competitors) == 4:
+    elif len(competitors) == 4:
         Gen4Man(competitors, gender, cat, wt)
+    elif len(competitors) == 5:
+        Gen5Man(competitors, gender, cat, wt)
+    elif len(competitors) <= 8:
+        Gen8Man(competitors, gender, cat, wt)
     else:
         pass
 
