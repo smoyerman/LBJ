@@ -456,26 +456,103 @@ def Gen8Man(competitors, gender, cat, wt):
     start1 = height-start
     start2 = height-start-deltaline
     c.drawString(startLeft, start1, "Gender: ")
-    c.drawString(width-8*start, start1, "1st")
+    c.drawString(width-8*start, start1, "1st (W7)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
     c.drawString(startLeft, start1, "Category: ")
-    c.drawString(width-8*start, start1, "2nd")
+    c.drawString(width-8*start, start1, "2nd (W8)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
     c.drawString(startLeft, start1, "Weight Class: ")
-    c.drawString(width-8*start, start1, "3rd")
+    c.drawString(width-8*start, start1, "3rd (L8)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     c.drawString(startLeft, start1, "Mat Area: ")
 
-    result = finders.find('registration/8man.png')
     c.drawImage(result, 1.5*start, start-0.5*inch, width=scaleFac*imgwidth, height=scaleFac*imgheight)
 
     for i,player in enumerate(players):
         c.drawString(leftBracket, 6.35*inch-i*0.49*inch, player)
+
+    c.save()
+
+
+# Generate 16 man bracket
+def Gen16Man(competitors, gender, cat, wt):
+
+    prepend = '16man_MD_'
+    fileName = GiveName(prepend, gender, cat, wt)
+    result = finders.find('registration/16man.png')
+    template_loc = finders.searched_locations[0]
+    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
+    c = canvas.Canvas(filePath, pagesize=letter)
+    width, height = letter
+    c.setLineWidth(.3)
+    c.setFont('Helvetica', 8)
+
+    ncomp = 16
+    byes = ncomp - len(competitors)
+    players = [""]*ncomp
+    if byes == 7:
+        bye_locs = [3,5,7,9,11,13,15]
+    elif byes == 6:
+        bye_locs = [3,5,7,11,13,15]
+    elif byes == 5:
+        bye_locs = [1,random.randint(2,5), random.randint(6,9), random.randint(10,13), random.randint(14,15)]
+    elif byes == 4:
+        bye_locs = [random.randint(0,3), random.randint(4,7), random.randint(8,11), random.randint(12,15)]
+    elif byes == 3:
+        bye_locs = [random.randint(0,5), random.randint(6,11), random.randint(12,15)]
+    elif byes == 2:
+        bye_locs = [random.randint(0,7), random.randint(8,15)]
+    elif byes == 1:
+        bye_locs = [random.randint(0,15)]
+    else:
+        bye_locs = []
+        
+    j = 0
+    for i in range(ncomp):
+        if i in bye_locs:
+            players[i] = "Bye"
+        else:
+            players[i] = competitors[j]
+            j += 1
+
+    deltay = 0.3*inch
+    start = 0.5*inch
+    startLeft = 0.4*inch
+    deltaline = 0.05*inch
+
+    imgwidth = 31.93*inch
+    imgheight = 36.61*inch
+    scaleFac=0.25
+
+    leftBracket = 0.65*inch
+
+    start1 = height-start
+    start2 = height-start-deltaline
+    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(width-8*start, start1, "1st (W15)")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(width-8*start, start1, "2nd (W16)")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    start2 = start1 - deltaline
+    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(width-8*start, start1, "3rd (L16)")
+    c.line(width-8*start, start2, width-start, start2)
+    start1 -= deltay
+    c.drawString(startLeft, start1, "Mat Area: ")
+
+    c.drawImage(result, 0.5*start, start-0.5*inch, width=scaleFac*imgwidth, height=scaleFac*imgheight)
+
+    for i,player in enumerate(players):
+        c.drawString(leftBracket, 8.75*inch-i*0.345*inch, player)
 
     c.save()
 
@@ -492,6 +569,8 @@ def CreatePDFBrackets(competitors, gender, cat, wt):
         Gen5Man(competitors, gender, cat, wt)
     elif len(competitors) <= 8:
         Gen8Man(competitors, gender, cat, wt)
+    elif len(competitors) <= 16:
+        Gen16Man(competitors, gender, cat, wt)
     else:
         pass
 
