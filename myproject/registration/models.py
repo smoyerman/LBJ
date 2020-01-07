@@ -19,8 +19,8 @@ class Parameters(object):
     JM_AGES[2005]='Cadet'
     JM_AGES[2006]='Juvenile'
     JM_AGES[2007]='Juvenile'
-    JM_AGES[2008]='Intermed.'
-    JM_AGES[2009]='Intermed.'
+    JM_AGES[2008]='Intermed'
+    JM_AGES[2009]='Intermed'
     JM_AGES[2010]='Bantam 3'
     JM_AGES[2011]='Bantam 3'
     JM_AGES[2012]='Bantam 2'
@@ -28,7 +28,7 @@ class Parameters(object):
     JM_WEIGHT = {}
     JM_WEIGHT['Bantam 2'] = [19,21,23,26,31,35]
     JM_WEIGHT['Bantam 3'] = [26,30,34,38,43]
-    JM_WEIGHT['Intermed.'] = [28,31,34,38,42,47,52]
+    JM_WEIGHT['Intermed'] = [28,31,34,38,42,47,52]
     JM_WEIGHT['Juvenile'] = [36,40,44,48,53,58,64]
     JM_WEIGHT['Cadet'] = [50,55,60,66,73,81,90]
     JM_WEIGHT['IJF'] = [60,66,73,81,90,100] 
@@ -42,8 +42,8 @@ class Parameters(object):
     JF_AGES[2005]='Cadet'
     JF_AGES[2006]='Juvenile'
     JF_AGES[2007]='Juvenile'
-    JF_AGES[2008]='Intermed.'
-    JF_AGES[2009]='Intermed.'
+    JF_AGES[2008]='Intermed'
+    JF_AGES[2009]='Intermed'
     JF_AGES[2010]='Bantam 3'
     JF_AGES[2011]='Bantam 3'
     JF_AGES[2012]='Bantam 2'
@@ -51,7 +51,7 @@ class Parameters(object):
     JF_WEIGHT = {}
     JF_WEIGHT['Bantam 2'] = [19,21,23,26,31,35]
     JF_WEIGHT['Bantam 3'] = [26,30,34,38,43]
-    JF_WEIGHT['Intermed.'] = [28,31,34,38,42,47,52]
+    JF_WEIGHT['Intermed'] = [28,31,34,38,42,47,52]
     JF_WEIGHT['Juvenile'] = [36,40,44,48,53,58,64]
     JF_WEIGHT['Cadet'] = [40,44,48,52,57,63,70]
     JF_WEIGHT['IJF'] = [48,52,57,63,70,78]
@@ -69,12 +69,12 @@ class Parameters(object):
     VT_WEIGHT['F'] = [55,70]
 
     JR_MATCH_TIMES = {}
-    JR_MATCH_TIMES['6-8'] = 3
-    JR_MATCH_TIMES['9-10'] = 3
-    JR_MATCH_TIMES['11-12'] = 3
-    JR_MATCH_TIMES['13-14'] = 3
-    JR_MATCH_TIMES['15-17'] = 3
-    JR_MATCH_TIMES['18-20'] = 4
+    JR_MATCH_TIMES['Bantam 2'] = 3
+    JR_MATCH_TIMES['Bantam 3'] = 3
+    JR_MATCH_TIMES['Intermed'] = 3
+    JR_MATCH_TIMES['Juvenile'] = 3
+    JR_MATCH_TIMES['Cadet'] = 3
+    JR_MATCH_TIMES['IJF'] = 4
 
 ############################# MODELS ######################################
 class Person(models.Model):
@@ -130,7 +130,7 @@ class Person(models.Model):
 
 
 class JuniorMale(models.Model):
-    AGE_CHOICES = (('Bantam 2','2012-2013 (Bantam 2)'), ('Bantam 3','2010-2011 (Bantam 3)'),('Intermed.','2008-2009 (Intermed.)'),
+    AGE_CHOICES = (('Bantam 2','2012-2013 (Bantam 2)'), ('Bantam 3','2010-2011 (Bantam 3)'),('Intermed','2008-2009 (Intermed)'),
             ('Juvenile','2006-2007 (Juvenile)'), ('Cadet','2003-2005 (Cadet)'), ('IJF','2000-2002 (IJF)'))
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     age_group = models.CharField("Age Group", max_length=10, choices=AGE_CHOICES, null=True)
@@ -184,7 +184,7 @@ class JuniorMale(models.Model):
 
 
 class JuniorFemale(models.Model):
-    AGE_CHOICES = (('Bantam 2','2012-2013 (Bantam 2)'), ('Bantam 3','2010-2011 (Bantam 3)'),('Intermed.','2008-2009 (Intermed.)'),
+    AGE_CHOICES = (('Bantam 2','2012-2013 (Bantam 2)'), ('Bantam 3','2010-2011 (Bantam 3)'),('Intermed','2008-2009 (Intermed)'),
             ('Juvenile','2006-2007 (Juvenile)'), ('Cadet','2003-2005 (Cadet)'), ('IJF','2000-2002 (IJF)'))
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     age_group = models.CharField("Age Group", max_length=10, choices=AGE_CHOICES, null=True)

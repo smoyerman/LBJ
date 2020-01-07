@@ -171,17 +171,17 @@ def Gen2Man(competitors, gender, cat, wt):
     
     start1 = height-start
     start2 = height-start-deltaline
-    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(startLeft, start1, "Gender: " + gender)
     c.drawString(width-8*start, start1, "1st")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(startLeft, start1, "Category: " + cat)
     c.drawString(width-8*start, start1, "2nd")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(startLeft, start1, "Weight Class: " + wt)
     c.drawString(width-8*start, start1, "3rd")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
@@ -230,17 +230,17 @@ def Gen3Man(competitors, gender, cat, wt):
     
     start1 = height-start
     start2 = height-start-deltaline
-    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(startLeft, start1, "Gender: " + gender)
     c.drawString(width-8*start, start1, "1st")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(startLeft, start1, "Category: " + cat)
     c.drawString(width-8*start, start1, "2nd")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(startLeft, start1, "Weight Class: " + wt)
     c.drawString(width-8*start, start1, "3rd")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
@@ -290,17 +290,17 @@ def Gen4Man(competitors, gender, cat, wt):
 
     start1 = height-start
     start2 = height-start-deltaline
-    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(startLeft, start1, "Gender: " + gender)
     c.drawString(width-8*start, start1, "1st")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(startLeft, start1, "Category: " + cat)
     c.drawString(width-8*start, start1, "2nd")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(startLeft, start1, "Weight Class: " + wt)
     c.drawString(width-8*start, start1, "3rd")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
@@ -359,17 +359,17 @@ def Gen5Man(competitors, gender, cat, wt):
 
     start1 = height-start
     start2 = height-start-deltaline
-    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(startLeft, start1, "Gender: " + gender)
     c.drawString(width-8*start, start1, "1st")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(startLeft, start1, "Category: " + cat)
     c.drawString(width-8*start, start1, "2nd")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(startLeft, start1, "Weight Class: " + wt)
     c.drawString(width-8*start, start1, "3rd")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
@@ -455,17 +455,17 @@ def Gen8Man(competitors, gender, cat, wt):
 
     start1 = height-start
     start2 = height-start-deltaline
-    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(startLeft, start1, "Gender: " + gender)
     c.drawString(width-8*start, start1, "1st (W7)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(startLeft, start1, "Category: " + cat)
     c.drawString(width-8*start, start1, "2nd (W8)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(startLeft, start1, "Weight Class: " + wt)
     c.drawString(width-8*start, start1, "3rd (L8)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
@@ -533,17 +533,17 @@ def Gen16Man(competitors, gender, cat, wt):
 
     start1 = height-start
     start2 = height-start-deltaline
-    c.drawString(startLeft, start1, "Gender: ")
+    c.drawString(startLeft, start1, "Gender: " + gender)
     c.drawString(width-8*start, start1, "1st (W15)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Category: ")
+    c.drawString(startLeft, start1, "Category: " + cat)
     c.drawString(width-8*start, start1, "2nd (W16)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
     start2 = start1 - deltaline
-    c.drawString(startLeft, start1, "Weight Class: ")
+    c.drawString(startLeft, start1, "Weight Class: " + wt)
     c.drawString(width-8*start, start1, "3rd (L16)")
     c.line(width-8*start, start2, width-start, start2)
     start1 -= deltay
@@ -559,7 +559,11 @@ def Gen16Man(competitors, gender, cat, wt):
 
 # Function to create brackets
 def CreatePDFBrackets(competitors, gender, cat, wt):
-    if len(competitors) == 2:
+    if len(competitors) == 0:
+        pass
+    elif len(competitors) == 1:
+        pass
+    elif len(competitors) == 2:
         Gen2Man(competitors, gender, cat, wt)
     elif len(competitors) == 3:
         Gen3Man(competitors, gender, cat, wt)
@@ -649,6 +653,12 @@ def CreateJuniorDivisions(request):
     if request.method == "POST":
         unique_jr_males,competing_jr_males,unique_jr_females,competing_jr_females = Create2DivJuniors() # Generate those with 2 jr divisions
         JMDivisions, JFDivisions = genJrDivisions()
+        for div in JMDivisions:
+            competitors = [p.person.last_Name + ', ' + p.person.first_Name[0] for p in div[2]]
+            gender = "Male"
+            cat = div[0]
+            wt = str(div[1]) 
+            CreatePDFBrackets(competitors, gender, cat, wt)
         # Figure out who's not in divisions!!!
         context = {'unique_jr_males':unique_jr_males,
                'competing_jr_males':competing_jr_males,
