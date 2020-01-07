@@ -11,22 +11,22 @@ from django import forms
 
 class Parameters(object):
     JM_AGES = {}
-    JM_AGES[1999]='18-20'
-    JM_AGES[2000]='18-20'
-    JM_AGES[2001]='18-20'
-    JM_AGES[2002]='15-17'
-    JM_AGES[2003]='15-17'
-    JM_AGES[2004]='15-17'
-    JM_AGES[2005]='13-14'
-    JM_AGES[2006]='13-14'
-    JM_AGES[2007]='11-12'
-    JM_AGES[2008]='11-12'
-    JM_AGES[2009]='9-10'
-    JM_AGES[2010]='9-10'
-    JM_AGES[2011]='6-8'
-    JM_AGES[2012]='6-8'
+    JM_AGES[2000]='IJF'
+    JM_AGES[2001]='IJF'
+    JM_AGES[2002]='IJF'
+    JM_AGES[2003]='Cadet'
+    JM_AGES[2004]='Cadet'
+    JM_AGES[2005]='Cadet'
+    JM_AGES[2006]='Juvenile'
+    JM_AGES[2007]='Juvenile'
+    JM_AGES[2008]='Intermed.'
+    JM_AGES[2009]='Intermed.'
+    JM_AGES[2010]='Bantam 3'
+    JM_AGES[2011]='Bantam 3'
+    JM_AGES[2012]='Bantam 2'
+    JM_AGES[2013]='Bantam 2'
     JM_WEIGHT = {}
-    JM_WEIGHT['6-8'] = [19,21,23,26,30,34,38]
+    JM_WEIGHT['6-8'] = [19,21,23,26,31,35]
     JM_WEIGHT['9-10'] = [26,30,34,38,43]
     JM_WEIGHT['11-12'] = [28,31,34,38,42,47,52]
     JM_WEIGHT['13-14'] = [36,40,44,48,53,58,64]
@@ -34,22 +34,22 @@ class Parameters(object):
     JM_WEIGHT['18-20'] = [60,66,73,81,90,100] 
 
     JF_AGES = {}
-    JF_AGES[1999]='18-20'
-    JF_AGES[2000]='18-20'
-    JF_AGES[2001]='18-20'
-    JF_AGES[2002]='15-17'
-    JF_AGES[2003]='15-17'
-    JF_AGES[2004]='15-17'
-    JF_AGES[2005]='13-14'
-    JF_AGES[2006]='13-14'
-    JF_AGES[2007]='11-12'
-    JF_AGES[2008]='11-12'
-    JF_AGES[2009]='9-10'
-    JF_AGES[2010]='9-10'
-    JF_AGES[2011]='6-8'
-    JF_AGES[2012]='6-8'
+    JF_AGES[2000]='IJF'
+    JF_AGES[2001]='IJF'
+    JF_AGES[2002]='IJF'
+    JF_AGES[2003]='Cadet'
+    JF_AGES[2004]='Cadet'
+    JF_AGES[2005]='Cadet'
+    JF_AGES[2006]='Juvenile'
+    JF_AGES[2007]='Juvenile'
+    JF_AGES[2008]='Intermed.'
+    JF_AGES[2009]='Intermed.'
+    JF_AGES[2010]='Bantam 3'
+    JF_AGES[2011]='Bantam 3'
+    JF_AGES[2012]='Bantam 2'
+    JF_AGES[2013]='Bantam 2'
     JF_WEIGHT = {}
-    JF_WEIGHT['6-8'] = [19,21,23,26,30,34,38]
+    JF_WEIGHT['6-8'] = [19,21,23,26,31,35]
     JF_WEIGHT['9-10'] = [26,30,34,38,43]
     JF_WEIGHT['11-12'] = [28,31,34,38,42,47,52]
     JF_WEIGHT['13-14'] = [36,40,44,48,53,58,64]
@@ -130,8 +130,8 @@ class Person(models.Model):
 
 
 class JuniorMale(models.Model):
-    AGE_CHOICES = (('6-8','2011-2012 (6-8)'), ('9-10','2009-2010 (9-10)'),('11-12','2007-2008 (11-12)'),
-            ('13-14','2005-2006 (13-14)'), ('15-17','2002-2004 (15-17)'), ('18-20','1999-2001 (18-20)'))
+    AGE_CHOICES = (('Bantam 2','2012-2013 (Bantam 2)'), ('Bantam 3','2010-2011 (Bantam 3)'),('Intermed.','2008-2009 (Intermed.)'),
+            ('Juvenile','2006-2007 (Juvenile)'), ('Cadet','2003-2005 (Cadet)'), ('IJF','2000-2002 (IJF)'))
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     age_group = models.CharField("Age Group", max_length=10, choices=AGE_CHOICES, null=True)
     weight_class = models.DecimalField("Weight Class (kgs)", decimal_places=1, max_digits=4, blank=True, null=True)
@@ -184,8 +184,8 @@ class JuniorMale(models.Model):
 
 
 class JuniorFemale(models.Model):
-    AGE_CHOICES = (('6-8','2011-2012 (6-8)'), ('9-10','2009-2010 (9-10)'),('11-12','2007-2008 (11-12)'),
- 		   ('13-14','2005-2006 (13-14)'), ('15-17','2002-2004 (15-17)'), ('18-20','1999-2001 (18-20)'))
+    AGE_CHOICES = (('Bantam 2','2012-2013 (Bantam 2)'), ('Bantam 3','2010-2011 (Bantam 3)'),('Intermed.','2008-2009 (Intermed.)'),
+            ('Juvenile','2006-2007 (Juvenile)'), ('Cadet','2003-2005 (Cadet)'), ('IJF','2000-2002 (IJF)'))
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     age_group = models.CharField("Age Group", max_length=10, choices=AGE_CHOICES, null=True)
     weight_class = models.DecimalField("Weight Class (kgs)", decimal_places=1, max_digits=4, blank=True, null=True)

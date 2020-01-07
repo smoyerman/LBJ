@@ -9,16 +9,16 @@
 <h3>For: {{person.first_Name}} {{person.last_Name}}</h3>
 <h3>{{person.get_category_display }}</h3>
 
-<p> Congratulations! You're registered for LB 2019! Good Luck</p>
+<p> Congratulations! You're registered for LB 2020! Good Luck</p>
 
 <p>You will be receiving an email at the email account associated with your registration ({{person.email.lower}}) confirming that your registration is complete and listing the pertinent tournament details. For you convenience, these details are also listed below.</p>
 
 <h3> Tournament Information </h3>
-<h3> April 27 & 28 - 2019 </h3>
+<h3> April 4 & 5 - 2020 </h3>
 
 <table class="reg_success" style="width:100%"> 
   <tr style="border: 1px solid black;">
-    <th style="border: 1px solid black;"><b><u>FRIDAY APRIL 26</b></u><br>
+    <th style="border: 1px solid black;"><b><u>FRIDAY APRIL 3</b></u><br>
 <u>REGISTRATION AND WEIGH IN (hotel)</u><br>
 <b>6-9 pm</b> Seniors and Veterans <br>
 <br>
@@ -27,7 +27,7 @@
 </th>
 
     <th style="border: 1px solid black;">
-<u><b>SATURDAY APRIL 27</b></u><br>
+<u><b>SATURDAY APRIL 4</b></u><br>
 <u>COMPETITION (venue)</u><br>
 8:00 am		Site Opens<br>
 8:30 am		Coaches Meeting<br>
@@ -43,7 +43,7 @@ Competition Seniors and Veterans<br>
 </th> 
 
     <th style="border: 1px solid black;">
-<b><u>SUNDAY APRIL 28</u></b>
+<b><u>SUNDAY APRIL 5</u></b>
 <u>COMPETITION (venue)</u>
 8:00 am		Site Opens<br>
 8:30 am		Coaches Meeting<br>
@@ -85,7 +85,7 @@ Adam Moyerman		(215) 815-2555<br>
 Kristin El Idrissi	(215) 470-4169<br>
 </td>
 <td>
-<a href="mailto:Libertybelljudo@gmail.com?Subject=Liberty%20Bell%202019%20Registration" target="_top">Libertybelljudo@gmail.com</a>
+<a href="mailto:Libertybelljudo@gmail.com?Subject=Liberty%20Bell%202020%20Registration" target="_top">Libertybelljudo@gmail.com</a>
 </td>
 </tr>
 
@@ -170,8 +170,9 @@ All youth, elite female open and mae elite nikyu & above - 4 minutes
 <tr>
 <td><b><u>Satellite Weigh Ins:</u></b></td>
 <td colspan="2">
-Any USA judo, USJF, or USJA certified coaches of a CERTIFIED CLUB, can request to host a satellite weigh-in. Any coaches interested must email Adam Moyerman requesting to host a satellite weigh-in at <a href="mailto:libertybelljudo@gmail.com">libertybelljudo@gmail.com</a> by April 11th. Only non-Elite pre – registered/paid athletes are eligible to be weighed-in at a satellite location. All satellite locations will be provided between April 12th and April 19th. Weigh-ins must occur between 3pm and 6pm on April 26th.<br> 
-A full list must be submitted to <a href="mailto:libertybelljudo@gmail.com">libertybelljudo@gmail.com</a> by 7pm April 26th. This list must have the following information: full name, age, gender, division, note if athlete is competing in 2 divisions, and weight in kilograms and coaches signature. <br>
+Any USA judo, USJF, or USJA certified coaches of a CERTIFIED CLUB, can request to host a satellite weigh-in. Any coaches interested must email Adam Moyerman requesting to host a satellite weigh-in at <a href="mailto:libertybelljudo@gmail.com">libertybelljudo@gmail.com</a> by April 11th. Only non-Elite pre – registered/paid athletes are eligible to be weighed-in at a satellite location. All satellite locations will be provided between March 20th and March 30th. Weigh-ins must occur between 3pm and 6pm on April 3rd.<br> 
+A full list must be submitted to <a href="mailto:libertybelljudo@gmail.com">libertybelljudo@gmail.com</a> by 7pm
+April 3rd. This list must have the following information: full name, age, gender, division, note if athlete is competing in 2 divisions, and weight in kilograms and coaches signature. <br>
 <b>NEW - The will be a weight verification process at the tournament for any judoka taking using a satellite weigh-in to verify the judoka is within the limit of what was stated at the satellite weigh in</b>
 </td></tr>
 
@@ -186,7 +187,6 @@ A full list must be submitted to <a href="mailto:libertybelljudo@gmail.com">libe
 <td colspan="2">
 Four Points Sheraton - 9461 Roosevelt Blvd Philadelphia, PA 19114<br>
 (215) 671-9600 <b>Ask for the Liberty Bell Judo Rate<br>
-Reserve By April 5th<br>
 Note ** - NO transportation from the Hotel to the Venue</b><br>
 </td></tr>
 
