@@ -21,4 +21,4 @@ urlpatterns = [
     path('registration/', include('registration.urls')),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/registration/person/add/')),
-]
+] 
