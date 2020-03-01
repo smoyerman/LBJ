@@ -1,5 +1,5 @@
 from django.urls import path
-from registration.views import PersonCreate, PersonDelete, Payment, JudoInfo, PaymentConfirmation, Waiver, PersonSort, CreateCompetitors, CreateJuniorDivisions, CreateSeniorDivisions, displayCompetitors, ShutDown
+from registration.views import PersonCreate, PersonDelete, Payment, JudoInfo, PaymentConfirmation, Waiver, PersonSort, CreateCompetitors, CreateJuniorDivisions, CreateSeniorDivisions, displayCompetitors, ShutDown, JuniorMales, JuniorFemales
 from django.conf.urls import url, include
 
 app_name = 'registration'
@@ -14,6 +14,8 @@ urlpatterns = [
     path('stats/', PersonSort),
     path('createCompetitors/', CreateCompetitors),
     path('createJuniorDivisions/', CreateJuniorDivisions),
+    path('JuniorMales/', JuniorMales),
+    path('JuniorFemales/', JuniorFemales),
     path('createSeniorDivisions/', CreateSeniorDivisions),
     path('<slug:competitor_class>/<int:weight_class>/competitors/',displayCompetitors), 
 ]

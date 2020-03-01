@@ -43,8 +43,10 @@ Payment_Options = {
 # Compute total matches
 def computeMatches(g):
     n = len(g)
-    if len(g) <= 5:
-        total_matches = max(0,int(n*(n-1)/2))
+    if len(g) <= 1:
+       total_matches = 0
+    elif len(g) <= 5:
+        total_matches = max(3,int(n*(n-1)/2))
     elif len(g) <= 8:
         total_matches = n + 3 + max(0,n-6)
     elif len(g) <= 16:
@@ -67,7 +69,7 @@ def genJrDivisions():
         for w in weight:
             g = JuniorFemale.objects.filter(age_group=age, weight_class=w)
             total_matches = computeMatches(g)
-            JFDivisions.append((age,w,g,total_matches,total_matches*params.JR_MATCH_TIMES[age]))
+            JFDivisions.append([age,w,g,total_matches,total_matches*params.JR_MATCH_TIMES[age],''])
     # Junior Male Divisions
     JMDivisions = []
     for age, weight  in params.JM_WEIGHT.items():
@@ -75,8 +77,34 @@ def genJrDivisions():
         for w in weight:
             g = JuniorMale.objects.filter(age_group=age, weight_class=w)
             total_matches = computeMatches(g)
-            JMDivisions.append((age,w,g,total_matches,total_matches*params.JR_MATCH_TIMES[age]))
+            JMDivisions.append([age,w,g,total_matches,total_matches*params.JR_MATCH_TIMES[age],''])
     return JMDivisions, JFDivisions
+
+# Function to generate divisions from competitors
+def genJrMaleDivisions():
+    params = Parameters()
+    # Junior Male Divisions
+    JMDivisions = []
+    for age, weight  in params.JM_WEIGHT.items():
+        weight.append(0)
+        for w in weight:
+            g = JuniorMale.objects.filter(age_group=age, weight_class=w)
+            total_matches = computeMatches(g)
+            JMDivisions.append([age,w,g,total_matches,total_matches*params.JR_MATCH_TIMES[age],''])
+    return JMDivisions
+
+# Function to generate divisions from competitors
+def genJrFemaleDivisions():
+    params = Parameters()
+    # Junior Female Divisions
+    JFDivisions = []
+    for age, weight in params.JF_WEIGHT.items():
+        weight.append(0)
+        for w in weight:
+            g = JuniorFemale.objects.filter(age_group=age, weight_class=w)
+            total_matches = computeMatches(g)
+            JFDivisions.append([age,w,g,total_matches,total_matches*params.JR_MATCH_TIMES[age],''])
+    return JFDivisions
 
 # Function to generate competitors from persons
 def genComp(persons):
@@ -146,13 +174,11 @@ def GiveName(prepend, gender, cat, wt):
     return fileName 
 
 # Generate 2 man bracket
-def Gen2Man(competitors, gender, cat, wt):
+def Gen2Man(competitors, gender, cat, wt, template_loc, filePath):
     prepend = '2man_RR_'
     fileName = GiveName(prepend, gender, cat, wt)
-    result = finders.find('registration/3man.png')
-    template_loc = finders.searched_locations[0]
-    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
-    c = canvas.Canvas(filePath, pagesize=landscape(letter))
+    result = os.path.join(template_loc, '2man.png')
+    c = canvas.Canvas(os.path.join(filePath,fileName), pagesize=letter)
     width, height = landscape(letter)
     c.setLineWidth(.3)
     c.setFont('Helvetica', 12)
@@ -200,18 +226,22 @@ def Gen2Man(competitors, gender, cat, wt):
     c.drawString(leftBracket, 1.6*inch, player1)
     c.drawString(leftBracket, 0.9*inch, player2)
 
-    c.save()
+    c.setFont('Helvetica', 12)
+    params = Parameters()
+    match_time = params.JR_MATCH_TIMES[cat]
+    c.drawString(width/2-2*inch, height - start, "Match Time:") 
+    c.drawString(width/2-2*inch, height - start - deltay, str(match_time) + " minutes")
 
+    c.save()
+    return fileName
 
 # Generate 3 man bracket
-def Gen3Man(competitors, gender, cat, wt):
+def Gen3Man(competitors, gender, cat, wt, template_loc, filePath):
     
     prepend = '3man_RR_'
     fileName = GiveName(prepend, gender, cat, wt)
-    result = finders.find('registration/3man.png')
-    template_loc = finders.searched_locations[0]
-    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
-    c = canvas.Canvas(filePath, pagesize=landscape(letter))
+    result = os.path.join(template_loc, '3man.png')
+    c = canvas.Canvas(os.path.join(filePath,fileName), pagesize=letter)
     width, height = landscape(letter)
     c.setLineWidth(.3)
     c.setFont('Helvetica', 12)
@@ -259,19 +289,23 @@ def Gen3Man(competitors, gender, cat, wt):
     c.drawString(leftBracket, 2.1*inch, player1)
     c.drawString(leftBracket, 1.5*inch, player2)
     c.drawString(leftBracket, 0.9*inch, player3)
+
+    c.setFont('Helvetica', 12)
+    params = Parameters()
+    match_time = params.JR_MATCH_TIMES[cat]
+    c.drawString(width/2-2*inch, height - start, "Match Time:") 
+    c.drawString(width/2-2*inch, height - start - deltay, str(match_time) + " minutes")
     
     c.save()
-
+    return fileName
 
 # Generate 4 man bracket
-def Gen4Man(competitors, gender, cat, wt):
+def Gen4Man(competitors, gender, cat, wt, template_loc, filePath):
 
     prepend = '4man_RR_'
     fileName = GiveName(prepend, gender, cat, wt)
-    result = finders.find('registration/4man.png')
-    template_loc = finders.searched_locations[0]
-    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
-    c = canvas.Canvas(filePath, pagesize=letter)
+    result = os.path.join(template_loc, '4man.png')
+    c = canvas.Canvas(os.path.join(filePath,fileName), pagesize=letter)
     width, height = letter
     c.setLineWidth(.3)
     c.setFont('Helvetica', 9)
@@ -329,18 +363,22 @@ def Gen4Man(competitors, gender, cat, wt):
     c.drawString(leftBracket+0.2*inch, 1.15*inch, player3)
     c.drawString(leftBracket+0.2*inch, 0.75*inch, player4)
 
-    c.save()
+    c.setFont('Helvetica', 12)
+    params = Parameters()
+    match_time = params.JR_MATCH_TIMES[cat]
+    c.drawString(width/2-2*inch, height - start, "Match Time:") 
+    c.drawString(width/2-2*inch, height - start - deltay, str(match_time) + " minutes")
 
+    c.save()
+    return fileName
 
 # Generate 5 man bracket
-def Gen5Man(competitors, gender, cat, wt):
+def Gen5Man(competitors, gender, cat, wt, template_loc, filePath):
 
     prepend = '5man_RR_' 
     fileName = GiveName(prepend, gender, cat, wt)
-    result = finders.find('registration/5man.png')
-    template_loc = finders.searched_locations[0]
-    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
-    c = canvas.Canvas(filePath, pagesize=landscape(letter))
+    result = os.path.join(template_loc, '5man.png')
+    c = canvas.Canvas(os.path.join(filePath,fileName), pagesize=letter)
     width, height = landscape(letter)
     c.setLineWidth(.3)
     c.setFont('Helvetica', 9)
@@ -409,18 +447,22 @@ def Gen5Man(competitors, gender, cat, wt):
     c.drawString(leftBracket+4.7*inch, 1.05*inch, player4)
     c.drawString(leftBracket+4.7*inch, 0.6*inch, player5)
 
-    c.save()
+    c.setFont('Helvetica', 12)
+    params = Parameters()
+    match_time = params.JR_MATCH_TIMES[cat]
+    c.drawString(width/2-2*inch, height - start, "Match Time:") 
+    c.drawString(width/2-2*inch, height - start - deltay, str(match_time) + " minutes")
 
+    c.save()
+    return fileName
 
 # Generate 8 man bracket
-def Gen8Man(competitors, gender, cat, wt):
+def Gen8Man(competitors, gender, cat, wt, template_loc, filePath):
 
-    prepend = '8man_MD_'
+    prepend = str(len(competitors)) + 'man_MD_'
     fileName = GiveName(prepend, gender, cat, wt)
-    result = finders.find('registration/8man.png')
-    template_loc = finders.searched_locations[0]
-    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
-    c = canvas.Canvas(filePath, pagesize=landscape(letter))
+    result = os.path.join(template_loc, '8man.png')
+    c = canvas.Canvas(os.path.join(filePath,fileName), pagesize=letter)
     width, height = landscape(letter)
     c.setLineWidth(.3)
     c.setFont('Helvetica', 10)
@@ -428,9 +470,9 @@ def Gen8Man(competitors, gender, cat, wt):
     byes = 8 - len(competitors)
     players = [""]*8
     if byes == 1:
-        bye_locs = [random.randint(0,7)]
+        bye_locs = [0]
     elif byes == 2:
-        bye_locs = [random.randint(0,3), random.randint(4,7)]
+        bye_locs = [0,4]
     else:
         bye_locs = []
         
@@ -475,19 +517,28 @@ def Gen8Man(competitors, gender, cat, wt):
 
     for i,player in enumerate(players):
         c.drawString(leftBracket, 6.35*inch-i*0.49*inch, player)
+        if player == "Bye":
+            if i == 0:
+                c.drawString(leftBracket, 1.94*inch, player)
+            elif i==4:
+                c.drawString(leftBracket, 0.96*inch, player)
+
+    c.setFont('Helvetica', 12)
+    params = Parameters()
+    match_time = params.JR_MATCH_TIMES[cat]
+    c.drawString(width/2-2*inch, height - start, "Match Time:") 
+    c.drawString(width/2-2*inch, height - start - deltay, str(match_time) + " minutes")
 
     c.save()
-
+    return fileName
 
 # Generate 16 man bracket
-def Gen16Man(competitors, gender, cat, wt):
+def Gen16Man(competitors, gender, cat, wt, template_loc, filePath):
 
-    prepend = '16man_MD_'
+    prepend = str(len(competitors)) + 'man_MD_'
     fileName = GiveName(prepend, gender, cat, wt)
-    result = finders.find('registration/16man.png')
-    template_loc = finders.searched_locations[0]
-    filePath = os.path.join(template_loc,'registration','poolsheets',fileName)
-    c = canvas.Canvas(filePath, pagesize=letter)
+    result = os.path.join(template_loc, '16man.png')
+    c = canvas.Canvas(os.path.join(filePath,fileName), pagesize=letter)
     width, height = letter
     c.setLineWidth(.3)
     c.setFont('Helvetica', 8)
@@ -512,6 +563,7 @@ def Gen16Man(competitors, gender, cat, wt):
     else:
         bye_locs = []
         
+
     j = 0
     for i in range(ncomp):
         if i in bye_locs:
@@ -554,29 +606,37 @@ def Gen16Man(competitors, gender, cat, wt):
     for i,player in enumerate(players):
         c.drawString(leftBracket, 8.75*inch-i*0.345*inch, player)
 
-    c.save()
+    c.setFont('Helvetica', 12)
+    params = Parameters()
+    match_time = params.JR_MATCH_TIMES[cat]
+    c.drawString(width/2-2*inch, height - start, "Match Time:") 
+    c.drawString(width/2-2*inch, height - start - deltay, str(match_time) + " minutes")
 
+    c.save()
+    return fileName
 
 # Function to create brackets
-def CreatePDFBrackets(competitors, gender, cat, wt):
+def CreatePDFBrackets(competitors, gender, cat, wt, template_loc, filePath):
+    fileName = ''
     if len(competitors) == 0:
         pass
     elif len(competitors) == 1:
         pass
     elif len(competitors) == 2:
-        Gen2Man(competitors, gender, cat, wt)
+        fileName = Gen2Man(competitors, gender, cat, wt, template_loc, filePath)
     elif len(competitors) == 3:
-        Gen3Man(competitors, gender, cat, wt)
+        fileName = Gen3Man(competitors, gender, cat, wt, template_loc, filePath)
     elif len(competitors) == 4:
-        Gen4Man(competitors, gender, cat, wt)
+        fileName = Gen4Man(competitors, gender, cat, wt, template_loc, filePath)
     elif len(competitors) == 5:
-        Gen5Man(competitors, gender, cat, wt)
+        fileName = Gen5Man(competitors, gender, cat, wt, template_loc, filePath)
     elif len(competitors) <= 8:
-        Gen8Man(competitors, gender, cat, wt)
+        fileName = Gen8Man(competitors, gender, cat, wt, template_loc, filePath)
     elif len(competitors) <= 16:
-        Gen16Man(competitors, gender, cat, wt)
+        fileName = Gen16Man(competitors, gender, cat, wt, template_loc, filePath)
     else:
         pass
+    return fileName
 
 ########## Juniors first - day one ##############
 def Create2DivJuniors():
@@ -646,6 +706,58 @@ def Create2DivJuniors():
     competing_jr_females = JuniorFemale.objects.count()
     return unique_jr_males, competing_jr_males, unique_jr_females, competing_jr_females
 
+
+# Function to create the junior female divisions
+def JuniorFemales(request):
+    params = Parameters()
+    context = {}
+    if request.method == "POST":
+        unique_jr_males,competing_jr_males,unique_jr_females,competing_jr_females = Create2DivJuniors() # Generate those with 2 jr divisions
+        JFDivisions = genJrFemaleDivisions()
+        result = finders.find('registration/2man.png')
+        template_loc = finders.searched_locations[0]
+        filePath = os.path.join(template_loc,'registration','poolsheets')
+        for div in JFDivisions:
+            competitors = [p.person.first_Name + ' ' + p.person.last_Name for p in div[2]]
+            gender = "Female"
+            cat = div[0]
+            wt = str(div[1])
+            fileName = CreatePDFBrackets(competitors, gender, cat, wt, template_loc, filePath)
+            div[-1] = fileName
+        # Figure out who's not in divisions!!!
+        context = {'unique_jr_males':unique_jr_males,
+               'competing_jr_males':competing_jr_males,
+               'unique_jr_females':unique_jr_females,
+               'competing_jr_females':competing_jr_females,
+               'JMDivisions':None, 'JFDivisions':JFDivisions}
+    return render(request, "create_divisions.html", context)
+
+
+# Function to create the junior male divisions
+def JuniorMales(request):
+    params = Parameters()
+    context = {}
+    if request.method == "POST":
+        unique_jr_males,competing_jr_males,unique_jr_females,competing_jr_females = Create2DivJuniors() # Generate those with 2 jr divisions
+        JMDivisions = genJrMaleDivisions()
+        result = finders.find('registration/2man.png')
+        template_loc = finders.searched_locations[0]
+        filePath = os.path.join(template_loc,'registration','poolsheets')
+        for div in JMDivisions:
+            competitors = [p.person.first_Name + ' ' + p.person.last_Name for p in div[2]]
+            gender = "Male"
+            cat = div[0]
+            wt = str(div[1])
+            fileName = CreatePDFBrackets(competitors, gender, cat, wt, template_loc, filePath)
+            div[-1] = fileName
+        # Figure out who's not in divisions!!!
+        context = {'unique_jr_males':unique_jr_males,
+               'competing_jr_males':competing_jr_males,
+               'unique_jr_females':unique_jr_females,
+               'competing_jr_females':competing_jr_females,
+               'JMDivisions':JMDivisions, 'JFDivisions':None}
+    return render(request, "create_divisions.html", context)
+
 # Function to create the junior divisions
 def CreateJuniorDivisions(request):
     params = Parameters()
@@ -653,12 +765,23 @@ def CreateJuniorDivisions(request):
     if request.method == "POST":
         unique_jr_males,competing_jr_males,unique_jr_females,competing_jr_females = Create2DivJuniors() # Generate those with 2 jr divisions
         JMDivisions, JFDivisions = genJrDivisions()
+        result = finders.find('registration/2man.png')
+        template_loc = os.path.join(finders.searched_locations[0],'registration')
+        filePath = os.path.join(template_loc,'poolsheets')
         for div in JMDivisions:
-            competitors = [p.person.last_Name + ', ' + p.person.first_Name[0] for p in div[2]]
+            competitors = [p.person.first_Name + ' ' + p.person.last_Name for p in div[2]]
             gender = "Male"
             cat = div[0]
             wt = str(div[1]) 
-            CreatePDFBrackets(competitors, gender, cat, wt)
+            fileName = CreatePDFBrackets(competitors, gender, cat, wt, template_loc, filePath)
+            div[-1] = fileName
+        for div in JFDivisions:
+            competitors = [p.person.first_Name + ' ' + p.person.last_Name for p in div[2]]
+            gender = "Female"
+            cat = div[0]
+            wt = str(div[1]) 
+            fileName = CreatePDFBrackets(competitors, gender, cat, wt, template_loc, filePath)
+            div[-1] = fileName
         # Figure out who's not in divisions!!!
         context = {'unique_jr_males':unique_jr_males,
                'competing_jr_males':competing_jr_males,

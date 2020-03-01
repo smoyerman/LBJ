@@ -3,23 +3,6 @@
 
 {% block content %}
 
-<script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-document.getElementById("defaultOpen").click();
-</script>
-
 <div class="form-basic" width="100%">
 
 <h2>Create Divisions</h2>
@@ -34,16 +17,9 @@ document.getElementById("defaultOpen").click();
 
 <br />
 
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'JuniorMales')" id="defaultOpen">Junior Males</button>
-  <button class="tablinks" onclick="openCity(event, 'JuniorFemales')">Junior Females</button>
-</div>
-
-<div id="JuniorMales" class="tabcontent">
-
+  {% if JMDivisions %}
+  
   <h2>Junior Males</h2>
-
-  {% if unique_jr_males %}
     
     Unique Junior Males: {{unique_jr_males}} <br>
     Junior Male Competitors: {{competing_jr_males}} <br><br>
@@ -55,28 +31,25 @@ document.getElementById("defaultOpen").click();
         <td>Number of Competitors</td>
         <td>Total Matches</td>
         <td>Match Time</td>
-        <td>Mat</td>
       </tr>
-      {% for age, weight, person, matches, matchtime in JMDivisions %}
-      <tr>
+      {% for age, weight, person, matches, matchtime, fileName in JMDivisions %}
+      <tr {% if person.count == 1 %}style="color: red; font-weight: bold;" {% else %}style="color: black;" {% endif %}>
         <th style="text-align:center">{{age}}</th>
         <th style="text-align:center">{{weight}}</th>
         <th style="text-align:center">{{person.count}}</th>
         <th style="text-align:center">{{matches}}</th>
         <th style="text-align:center">{{matchtime}}</th>
-        <th style="text-align:center">0</th>
+        <th style="text-align:center"><a href="http://libertybellregistration.com/static/registration/poolsheets/{{fileName}}" target="_blank">Pool Sheet</a></th>
       </tr>
     {% endfor %}
 
   {% endif %}
 
-</div>
 
-<div id="JuniorFemales" class="tabcontent">
+  {% if JFDivisions %}
 
   <h2>Junior Females</h2>
 
-  {% if unique_jr_females %}
     
     Unique Junior Females: {{unique_jr_females}} <br>
     Junior Female Competitors: {{competing_jr_females}} <br><br>
@@ -88,21 +61,19 @@ document.getElementById("defaultOpen").click();
         <td>Number of Competitors</td>
         <td>Total Matches</td>
         <td>Match Time</td>
-        <td>Mat</td>
+        <td>Pool Sheet</td>
       </tr>
-      {% for age, weight, person, matches, matchtime in JFDivisions %}
-      <tr>
+      {% for age, weight, person, matches, matchtime, fileName in JFDivisions %}
+      <tr {% if person.count == 1 %}style="color: red; font-weight: bold;" {% else %}style="color: black;" {% endif %}>
         <th style="text-align:center">{{age}}</th>
         <th style="text-align:center">{{weight}}</th>
         <th style="text-align:center">{{person.count}}</th>
         <th style="text-align:center">{{matches}}</th>
         <th style="text-align:center">{{matchtime}}</th>
-        <th style="text-align:center">0</th>
+        <th style="text-align:center">{% if person.count >= 1 %}<a href="http://libertybellregistration.com/static/registration/poolsheets/{{fileName}}" target="_blank">Pool Sheet</a>{% endif %}</th>
       </tr>
     {% endfor %}
 
   {% endif %}
-
-</div>
 
 {% endblock %}
