@@ -547,19 +547,19 @@ def Gen16Man(competitors, gender, cat, wt, template_loc, filePath):
     byes = ncomp - len(competitors)
     players = [""]*ncomp
     if byes == 7:
-        bye_locs = [3,5,7,9,11,13,15]
+        bye_locs = [0,2,4,6,8,10,12] 
     elif byes == 6:
-        bye_locs = [3,5,7,11,13,15]
+        bye_locs = [0,2,4,8,10,12]
     elif byes == 5:
-        bye_locs = [1,random.randint(2,5), random.randint(6,9), random.randint(10,13), random.randint(14,15)]
+        bye_locs = [0,2,4,8,10]
     elif byes == 4:
-        bye_locs = [random.randint(0,3), random.randint(4,7), random.randint(8,11), random.randint(12,15)]
+        bye_locs = [0,2,8,10]
     elif byes == 3:
-        bye_locs = [random.randint(0,5), random.randint(6,11), random.randint(12,15)]
+        bye_locs = [0,2,8]
     elif byes == 2:
-        bye_locs = [random.randint(0,7), random.randint(8,15)]
+        bye_locs = [0,8] 
     elif byes == 1:
-        bye_locs = [random.randint(0,15)]
+        bye_locs = [0]
     else:
         bye_locs = []
         
@@ -605,6 +605,8 @@ def Gen16Man(competitors, gender, cat, wt, template_loc, filePath):
 
     for i,player in enumerate(players):
         c.drawString(leftBracket, 8.75*inch-i*0.345*inch, player)
+        if player == "Bye":
+            c.drawString(leftBracket, 8.75*inch-(17.6+i/2)*0.345*inch, player)
 
     c.setFont('Helvetica', 12)
     params = Parameters()
