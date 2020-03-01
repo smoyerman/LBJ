@@ -75,6 +75,9 @@ class Parameters(object):
     JR_MATCH_TIMES['Juvenile'] = 3
     JR_MATCH_TIMES['Cadet'] = 3
     JR_MATCH_TIMES['IJF'] = 4
+    # All Senior match times are 3 minutes except elite categories
+    SR_MATCH_TIMES = {}
+    SR_MATCH_TIMES['Elite'] = 4
 
 ############################# MODELS ######################################
 class Person(models.Model):
